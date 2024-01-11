@@ -48,7 +48,7 @@ function help() {
   } else {
     helpParagraph = document.createElement("p");
     helpParagraph.innerHTML =
-      "This program uses a special method to allow you to learn flashcards more quickly";
+      "This program uses a special method to allow you to learn flashcards more quickly by learning new cards while also reviewing what you have already learned";
     console.log(helpParagraph);
     document.body.appendChild(helpParagraph);
   }
