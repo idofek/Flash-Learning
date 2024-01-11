@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Learning</title>
+    <link rel="stylesheet" type="text/css" href="/learnStyle.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>You are learning</h1>
+
+    <h3>What do you want to learn?</h3>
+
+    <button class="learning-options"
+            onclick="learnFrench()">
+        French</button>
+    <button class="learning-options"
+            onclick="learnHistory()">
+        History</button>
+    <div class="french">
+        <h3 class="french_title">You are going to be learning french</h3>
+
+        <div class="container french-div">
+            <div class="user-input">
+                <p>What does bonjour mean in english?</p>
+            </div>
+            <div class="boxes">
+                <input 
+                class="js-translation-input"
+                onkeydown="
+                if(event.key === 'Enter'){
+                    checkTranslation('hello');
+                }
+                ">
+                <br>
+                <button
+                onclick="
+                checkTranslation('hello');
+                "
+                class="check-button"
+                >Check</button>
+            
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="history">
+            <div class="user-input">
+                <p>What is Obama's last name?</p>
+            </div>
+            <div class="boxes">
+                <input 
+                class="js-translation-input-history"
+                onkeydown="
+                if(event.key === 'Enter'){
+                    console.log('Enter clicked');
+                    checkTranslation('Obama');
+                }
+                ">
+                <br>
+                <button
+                onclick="
+                console.log('Button clicked')
+                checkTranslation('Obama');
+                "
+                class="check-button-history"
+                >Check</button>
+            
+                
+            </div>
+            
+    </div>
+
+    <div class="result">
+        <p class="result-text">Wrong</p>
+        <button
+        class="next-question-button"
+         onclick="
+            nextQuestion();
+        "
+        >Next Question</button>
+    </div>
+
+    
+    <button
+            onclick="
+            goHome();
+            "
+            class="Back"
+            >Go Back</button>
+</body>
+</html>

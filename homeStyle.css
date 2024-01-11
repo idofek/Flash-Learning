@@ -1,0 +1,23 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    background-color: #5d5c61;
+
+
+}
+
+h1{
+    color:white;
+}
+
+p{
+    color: white;
+}
+
+button{
+    padding: 10px;
+    font-size: 16px;
+    margin: 20px;
+    background-color: #7395ae;
+    color: white;
+}
