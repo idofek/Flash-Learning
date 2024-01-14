@@ -13,30 +13,30 @@
     <h3>What do you want to learn?</h3>
 
     <button class="learning-options"
-            onclick="learnFrench()">
+            onclick="showFrench(); learnFrench();">
         French</button>
     <button class="learning-options"
-            onclick="learnHistory()">
+            onclick="showHistory(); learnHistory();">
         History</button>
     <div class="french">
         <h3 class="french_title">You are going to be learning french</h3>
 
         <div class="container french-div">
             <div class="user-input">
-                <p>What does bonjour mean in english?</p>
+                <p id="french-question"></p>
             </div>
             <div class="boxes">
                 <input 
                 class="js-translation-input"
                 onkeydown="
                 if(event.key === 'Enter'){
-                    checkTranslation('hello');
+                    checkTranslation();
                 }
                 ">
                 <br>
                 <button
                 onclick="
-                checkTranslation('hello');
+                checkTranslation();
                 "
                 class="check-button"
                 >Check</button>
@@ -48,7 +48,7 @@
     
     <div class="history">
             <div class="user-input">
-                <p>What is Obama's last name?</p>
+                <p id="history-question"></p>
             </div>
             <div class="boxes">
                 <input 
@@ -56,14 +56,14 @@
                 onkeydown="
                 if(event.key === 'Enter'){
                     console.log('Enter clicked');
-                    checkTranslation('Obama');
+                    checkTranslation();
                 }
                 ">
                 <br>
                 <button
                 onclick="
                 console.log('Button clicked')
-                checkTranslation('Obama');
+                checkTranslation();
                 "
                 class="check-button-history"
                 >Check</button>
