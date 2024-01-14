@@ -27,7 +27,7 @@ class Flashcard {
 
 const historyFlashcards = [
   new Flashcard("What is Obama's last name?", "Obama"),
-  new Flashcard("What is Obama's birthday (M/D) formath", "10/4"),
+  new Flashcard("What is Obama's birthday (M/D) format", "8/4"),
   new Flashcard("Where was Obama born?", "Hawaii"),
 ];
 
