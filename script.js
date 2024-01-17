@@ -47,6 +47,10 @@ function learn() {
   window.location.href = "learn.html";
 }
 
+function flashLearn(){
+  window.location.href = "flash-learn.html";
+}
+
 function help() {
   if (helpParagraph) {
     helpParagraph.remove();

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Learning</title>
+    <link rel="stylesheet" type="text/css" href="/flashcard.css" />
+    <script src="flash.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="flashcard">
+        <h1 id="flash-question">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
+          repellat. Quidem, adipisci. Cumque officia libero vel, nemo esse vitae
+          nam dolorem facilis laboriosam voluptates. Impedit iusto blanditiis
+          sunt earum libero?
+        </h1>
+        <div class="answers">
+          <input
+            id="flashcard-input"
+            onkeydown="
+                  if(event.key === 'Enter'){
+                      checkTranslation();
+                  }
+                  "
+          />
+          <button
+            onclick="
+                  checkTranslation();
+                  "
+            id="answer-button"
+          >
+            Answer
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
