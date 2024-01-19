@@ -10,13 +10,36 @@
   <body>
     <div class="container">
       <div class="flashcard">
+        <!--The text that shows up which is either the question or the answer -->
         <h1 id="flash-question">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
           repellat. Quidem, adipisci. Cumque officia libero vel, nemo esse vitae
           nam dolorem facilis laboriosam voluptates. Impedit iusto blanditiis
           sunt earum libero?
         </h1>
-        <div class="answers">
+
+        <!-- A div which contains buttons which shows up durng stage 1-->
+        <div id="learning">
+          <button
+            onclick="
+          flip();
+          "
+            id="flip-button"
+          >
+            Flip Card
+          </button>
+          <button
+            onclick="
+          changeStage12();
+          "
+            id="next-button"
+          >
+            Next Stage
+          </button>
+        </div>
+
+        <!--This div contains an input and a button to check user input -->
+        <div id="answers">
           <input
             id="flashcard-input"
             onkeydown="
@@ -32,6 +55,19 @@
             id="answer-button"
           >
             Answer
+          </button>
+        </div>
+
+        <!-- This div shows the text true or false depending on whether the user got the answer true or false and a button to continue-->
+        <div id="correctness">
+          <h1 id="rightWrong">Wrong</h1>
+          <button
+            onclick="
+                  continued();
+                  "
+            id="continued"
+          >
+            Continue
           </button>
         </div>
       </div>

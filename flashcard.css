@@ -26,8 +26,11 @@ body {
   margin: 50px;
 }
 
-.answers {
+#answers {
+  display: none;
+  /*
   display: flex;
+  */
   justify-content: space-evenly;
   width: 100%;
   height: 100px;
@@ -43,4 +46,20 @@ body {
 #answer-button {
     height: 40px;
     width: 80px;
+}
+
+#correctness {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#rightWrong{
+  font-size: 100px;
+  margin: 30px;
+}
+
+#continued{
+  height: 40px;
+  width: 80px;
 }
