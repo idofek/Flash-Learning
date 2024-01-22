@@ -50,7 +50,7 @@ var frenchFlashcards = [
 //This array will have all of the cards that the user has seen and will need to study
 var remainingCards = [];
 //This array will have all of the cards that the user got correct in a certain level
-var correctLis = [];
+var correctList = [];
 //This array will have all of the cards that the user got wrong in a certain level
 var wrongList = [];
 var cardsLearned = 0;
@@ -92,6 +92,7 @@ function flip() {
 function changeStage12() {
     console.log("Starting change from stage 1 to stage 2");
     stage = 2;
+    console.log("New stage: " + stage);
     var learningButtons = document.getElementById("learning");
     if (learningButtons) {
         learningButtons.style.display = "none";
@@ -135,9 +136,10 @@ function changeStage21Correct() {
         learningButtons.style.display = "flex";
     }
     //Updating the cards learned count
-    cardsLearned++;
+    //cardsLearned++;
     //Updating the current question
-    if (cardsLearned <= frenchFlashcards.length) {
+    if (cardsLearned <= frenchFlashcards.length &&
+        frenchFlashcards[cardsLearned] !== undefined) {
         currentCard = frenchFlashcards[cardsLearned];
     }
     else {
@@ -149,7 +151,18 @@ function changeStage21Correct() {
         flashcardText.innerHTML = currentCard.question;
     }
 }
-function changeStage23() { }
+function changeStage23() {
+    stage = 3;
+    currentCard = remainingCards[0];
+    var flashcardText = document.querySelector("#flash-question");
+    if (flashcardText && currentCard) {
+        flashcardText.innerHTML = currentCard.question;
+    }
+    var answerButtons = document.getElementById("answers");
+    if (answerButtons) {
+        answerButtons.style.display = "flex";
+    }
+}
 //Checking if the current input is correct
 function checkTranslationInitial() {
     var translation = (document.getElementById("flashcard-input"));
@@ -226,18 +239,25 @@ function answerWrong() {
     }
 }
 function checkTranslation() {
-    if (stage === 2) {
-        checkTranslationInitial();
-    }
-    else {
-        //lastInput = translation.value.toLowerCase();
-    }
+    //if (stage === 2) {
+    checkTranslationInitial();
+    //} else {
+    //lastInput = translation.value.toLowerCase();
+    //}
 }
 //Remove the text (that says if the button is correct or not)
 //Removes the button that continues
 //Put back the correct elements
 //Do this by calling changeStage21Correct()
 function continued() {
+    if (stage === 2) {
+        continueStage2();
+    }
+    else if (stage === 3) {
+        continueStage3();
+    }
+}
+function continueStage2() {
     var correctness = document.getElementById("correctness");
     if (correctness) {
         correctness.style.display = "none";
@@ -248,15 +268,108 @@ function continued() {
     }
     //Not sure if this is okay or not
     var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer);
-    ;
-    if (stage === 2 && answerCorrect === true) {
-        changeStage21Correct();
+    console.log("Answer is " + answerCorrect);
+    if (stage === 2 && answerCorrect === true && currentCard != undefined) {
+        //Add the card to the remaining card list
+        remainingCards.push(currentCard);
+        //Go to stage three with the correct cards
+        changeStage23();
     }
     else if (stage === 2 && answerCorrect === false) {
         changeStage21Wrong();
     }
-    else if (stage === 3) {
-        //TODO
-        //This is when the user is in the middle of answering all of the remaining flashcards and they get one either right or wrong
+}
+function continueStage3() {
+    //This is when the user is in the middle of answering all of the remaining flashcards and they get one either right or wrong
+    var correctness = document.getElementById("correctness");
+    if (correctness) {
+        correctness.style.display = "none";
+    }
+    var flashcardText = document.getElementById("flash-question");
+    if (flashcardText) {
+        flashcardText.style.display = "block";
+    }
+    var answerButtons = document.getElementById("answers");
+    if (answerButtons) {
+        answerButtons.style.display = "flex";
+    }
+    //Not sure if this is okay or not
+    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer);
+    console.log("Answer is " + answerCorrect);
+    if (answerCorrect && currentCard != undefined) {
+        //Push the card to the correct list
+        correctList.push(currentCard);
+        //Remove current card from the remaining list
+        var index = remainingCards.indexOf(currentCard);
+        if (index !== -1) {
+            remainingCards.splice(index, 1);
+        }
+        console.log("Moved card to correctList");
+    }
+    else if (currentCard != undefined) {
+        //Push the card to the wrong list
+        wrongList.push(currentCard);
+        //Remove the card from the remianing list
+        var index = remainingCards.indexOf(currentCard);
+        if (index !== -1) {
+            remainingCards.splice(index, 1);
+        }
+        console.log("Moved card to wrongList");
+    }
+    //Check if there are any remianing cards left to be learned
+    if (remainingCards.length != 0) {
+        currentCard = remainingCards[0];
+        //Update the text
+        var flashcardText_1 = document.querySelector("#flash-question");
+        if (flashcardText_1 && currentCard) {
+            flashcardText_1.innerHTML = currentCard.question;
+        }
+    }
+    else {
+        //There are no more cards left in remaining cards
+        cardsLearned++;
+        //If there are wrong answers then the user has to get all of them right  
+        if (wrongList.length != 0) {
+            stage = 4;
+            //Set up stage 4
+            //TODO
+        }
+        else {
+            //If there are no wrong answers then the user can move onto a new card
+            //Check if we learned all of the cards
+            if (cardsLearned === frenchFlashcards.length) {
+                //If we did then we finish and go to stage 5
+                stage = 5;
+                //TODO: Set up stage 5
+            }
+            else {
+                stage = 1;
+                moveToDifferentList(remainingCards, correctList);
+                currentCard = frenchFlashcards[cardsLearned];
+                changeStage31();
+            }
+        }
+    }
+}
+function changeStage31() {
+    console.log("Starting change from stage 3 to stage 1");
+    stage = 1;
+    var answerButtons = document.getElementById("answers");
+    if (answerButtons) {
+        answerButtons.style.display = "none";
+    }
+    var learningButtons = document.getElementById("learning");
+    if (learningButtons) {
+        learningButtons.style.display = "flex";
+    }
+    var flashcardText = document.querySelector("#flash-question");
+    if (flashcardText && currentCard) {
+        flashcardText.innerHTML = currentCard.question;
+    }
+}
+function moveToDifferentList(newList, oldList) {
+    while (oldList.length !== 0) {
+        newList.push(oldList[0]);
+        oldList.shift();
     }
 }
