@@ -256,6 +256,9 @@ function continued() {
     else if (stage === 3) {
         continueStage3();
     }
+    else if (stage === 4) {
+        continueStage4();
+    }
 }
 function continueStage2() {
     var correctness = document.getElementById("correctness");
@@ -327,12 +330,11 @@ function continueStage3() {
     }
     else {
         //There are no more cards left in remaining cards
-        cardsLearned++;
-        //If there are wrong answers then the user has to get all of them right  
+        //If there are wrong answers then the user has to get all of them right
         if (wrongList.length != 0) {
             stage = 4;
             //Set up stage 4
-            //TODO
+            changeStage34();
         }
         else {
             //If there are no wrong answers then the user can move onto a new card
@@ -344,11 +346,76 @@ function continueStage3() {
             }
             else {
                 stage = 1;
+                cardsLearned++;
                 moveToDifferentList(remainingCards, correctList);
                 currentCard = frenchFlashcards[cardsLearned];
                 changeStage31();
             }
         }
+    }
+}
+function continueStage4() {
+    var correctness = document.getElementById("correctness");
+    if (correctness) {
+        correctness.style.display = "none";
+    }
+    var flashcardText = document.getElementById("flash-question");
+    if (flashcardText) {
+        flashcardText.style.display = "block";
+    }
+    var answerButtons = document.getElementById("answers");
+    if (answerButtons) {
+        answerButtons.style.display = "flex";
+    }
+    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer);
+    console.log("Answer is " + answerCorrect);
+    if (answerCorrect && currentCard != undefined) {
+        //Push the card to the correct list
+        correctList.push(currentCard);
+        //Remove the card from the wrong list
+        var index = wrongList.indexOf(currentCard);
+        if (index !== -1) {
+            wrongList.splice(index, 1);
+        }
+        //Check if wrongList is empty
+        if (wrongList.length != 0) {
+            currentCard = wrongList[0];
+            var flashcardText_2 = document.querySelector("#flash-question");
+            if (flashcardText_2 && currentCard) {
+                flashcardText_2.innerHTML = currentCard.question;
+            }
+        }
+        else {
+            //TODO
+            //Have the user choose if they want to review the cards again or if they want to go straight to a new card
+            //Right now I have it so they can move straight to a new card
+            stage = 1;
+            moveToDifferentList(remainingCards, correctList);
+            cardsLearned++;
+            currentCard = frenchFlashcards[cardsLearned];
+            changeStage31();
+        }
+    }
+    else if (currentCard != undefined) {
+        //Move the card to the end of the list
+        var index = wrongList.indexOf(currentCard);
+        if (index !== -1) {
+            wrongList.splice(index, 1);
+        }
+        wrongList.push(currentCard);
+        //Update current card and the text
+        currentCard = wrongList[0];
+        var flashcardText_3 = document.querySelector("#flash-question");
+        if (flashcardText_3 && currentCard) {
+            flashcardText_3.innerHTML = currentCard.question;
+        }
+    }
+}
+function changeStage34() {
+    currentCard = wrongList[0];
+    var flashcardText = document.querySelector("#flash-question");
+    if (flashcardText && currentCard) {
+        flashcardText.innerHTML = currentCard.question;
     }
 }
 function changeStage31() {
