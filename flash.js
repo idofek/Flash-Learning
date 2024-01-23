@@ -39,13 +39,18 @@ var frenchFlashcards = [
     new Flashcard("What does bonjour mean in english?", "hello"),
     new Flashcard('What is the English translation of "au revoir?', "goodbye"),
     new Flashcard('Translate "merci" to English', "thank you"),
+    /*
     new Flashcard('What does "s\'il vous plaît" mean in English?', "please"),
-    new Flashcard("What does merci beaucoup mean in English?", "thank you very much"),
+    new Flashcard(
+      "What does merci beaucoup mean in English?",
+      "thank you very much"
+    ),
     new Flashcard('Translate "excusez-moi" to English', "excuse me"),
     new Flashcard('How do you say "yes" in French?', "oui"),
     new Flashcard('What is the English translation of "non"?', "no"),
     new Flashcard('Translate "comment ça va?" to English', "how are you?"),
     new Flashcard('Translate "aujourd\'hui" to English', "today"),
+    */
 ];
 //This array will have all of the cards that the user has seen and will need to study
 var remainingCards = [];
@@ -339,10 +344,11 @@ function continueStage3() {
         else {
             //If there are no wrong answers then the user can move onto a new card
             //Check if we learned all of the cards
-            if (cardsLearned === frenchFlashcards.length) {
+            if (cardsLearned === frenchFlashcards.length - 1) {
                 //If we did then we finish and go to stage 5
                 stage = 5;
                 //TODO: Set up stage 5
+                window.location.href = "index.html";
             }
             else {
                 stage = 1;
@@ -384,6 +390,10 @@ function continueStage4() {
             if (flashcardText_2 && currentCard) {
                 flashcardText_2.innerHTML = currentCard.question;
             }
+        }
+        else if (cardsLearned === frenchFlashcards.length - 1) {
+            stage = 5;
+            window.location.href = "index.html";
         }
         else {
             //TODO
