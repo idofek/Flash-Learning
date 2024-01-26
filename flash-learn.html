@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="flashcard">
+      <div id="flashcard">
         <!--The text that shows up which is either the question or the answer -->
         <h1 id="flash-question">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
@@ -61,19 +61,32 @@
         <!-- This div shows the text true or false depending on whether the user got the answer true or false and a button to continue-->
         <div id="correctness">
           <h1 id="rightWrong">Wrong</h1>
-          <button
-            onclick="
+          <div id="correctness-buttons">
+            <button
+              onclick="
                   continued();
                   "
-            id="continued"
-          >
-            Continue
-          </button>
+              id="continued"
+            >
+              Continue
+            </button>
+            <button
+              onclick="
+              override();
+            "
+              id="override-button"
+            >
+              Override
+            </button>
+          </div>
         </div>
 
         <div id="transitionStage">
           <h1 id="transitionTitle">Starting stage 1</h1>
-          <p id="stage-description">Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.</p>
+          <p id="stage-description">
+            Stage 1: Introducing New Cards – Familiarize yourself with a new
+            flashcard pair.
+          </p>
           <button
             id="changeStage"
             onclick="
@@ -83,6 +96,12 @@
             Next
           </button>
         </div>
+      </div>
+
+      <div id="complete">
+        <h1>Congrats</h1>
+        <h2>You have learned all of your flashcards!</h2>
+        <button id="goHome" onclick="goHome()">Go home</button>
       </div>
     </div>
   </body>

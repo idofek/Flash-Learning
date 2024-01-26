@@ -41,14 +41,19 @@ function setup() {
 var frenchFlashcards = [
     new Flashcard("What does bonjour mean in english?", "Hello"),
     new Flashcard('What is the English translation of "au revoir?', "Goodbye"),
+    /*
     new Flashcard('Translate "merci" to English', "Thank you"),
     new Flashcard('What does "s\'il vous plaît" mean in English?', "Please"),
-    new Flashcard("What does merci beaucoup mean in English?", "Thank you very much"),
+    new Flashcard(
+      "What does merci beaucoup mean in English?",
+      "Thank you very much"
+    ),
     new Flashcard('Translate "excusez-moi" to English', "Excuse me"),
     new Flashcard('How do you say "yes" in French?', "Oui"),
     new Flashcard('What is the English translation of "non"?', "No"),
     new Flashcard('Translate "comment ça va?" to English', "How are you?"),
     new Flashcard('Translate "aujourd\'hui" to English', "Today"),
+    */
 ];
 var stage1Description = "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
 var stage2Description = "Stage 2: Initial Recall – Test your memory by typing in the answer to the presented question.";
@@ -234,6 +239,11 @@ function answerRight() {
     if (flashcardText) {
         flashcardText.style.display = "none";
     }
+    //Hide override
+    var override = document.getElementById("override-button");
+    if (override) {
+        override.style.display = "none";
+    }
     var correctness = document.getElementById("correctness");
     if (correctness) {
         correctness.style.display = "flex";
@@ -262,6 +272,10 @@ function answerWrong() {
     if (correctText) {
         correctText.innerHTML = "Wrong";
         correctText.style.color = "#8B0000";
+    }
+    var override = document.getElementById("override-button");
+    if (override) {
+        override.style.display = "block";
     }
 }
 function checkTranslation() {
@@ -370,7 +384,7 @@ function continueStage3() {
                 //If we did then we finish and go to stage 5
                 stage = 5;
                 //TODO: Set up stage 5
-                window.location.href = "index.html";
+                complete();
             }
             else {
                 stage = 1;
@@ -415,7 +429,8 @@ function continueStage4() {
         }
         else if (cardsLearned === frenchFlashcards.length - 1) {
             stage = 5;
-            window.location.href = "index.html";
+            complete();
+            //window.location.href = "index.html";
         }
         else {
             //TODO
@@ -506,6 +521,10 @@ function transitionToNextPage() {
     if (correctness) {
         correctness.style.display = "none";
     }
+    var override = document.getElementById("override-button");
+    if (override) {
+        override.style.display = "none";
+    }
     //In case we are coming from stage 1
     var learning = document.getElementById("learning");
     if (learning) {
@@ -521,7 +540,8 @@ function transitionToNextPage() {
     }
     var title = document.getElementById("transitionTitle");
     var description = document.getElementById("stage-description");
-    if (title && description) {
+    if (title && description && currentCard) {
+        console.log("Does " + lastInput + " === " + currentCard.answer.toLowerCase());
         //Checking if we are in the middle of stage 3
         if (stage === 3 && remainingCards.length > 1) {
             nextButtonClicked();
@@ -538,7 +558,7 @@ function transitionToNextPage() {
                 nextButtonClicked();
             }
         }
-        else if (stage === 2 && lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
+        else if (stage === 2 && lastInput === currentCard.answer.toLowerCase()) {
             title.innerText = "Starting stage 3";
             description.innerText = stage3Description;
             transition3Counter++;
@@ -573,6 +593,10 @@ function transitionToNextPage() {
                 title.innerText = "Learning a new card";
                 description.innerText = "";
                 //nextButtonClicked();
+            }
+            //Check if the game is finished
+            if (cardsLearned + 1 === frenchFlashcards.length) {
+                complete();
             }
         }
         else if (stage === 4 && lastInput != (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
@@ -621,4 +645,26 @@ function shuffle(array) {
         ], array[currentIndex] = _a[0], array[randomIndex] = _a[1];
     }
     return array;
+}
+function override() {
+    if (currentCard) {
+        lastInput = currentCard.answer.toLowerCase();
+        answerRight();
+    }
+    else {
+        console.log("Error: currentCard is undefined");
+    }
+}
+function complete() {
+    var flashcard = document.getElementById("flashcard");
+    if (flashcard) {
+        flashcard.style.display = "none";
+    }
+    var completeDiv = document.getElementById("complete");
+    if (completeDiv) {
+        completeDiv.style.display = "flex";
+    }
+}
+function goHome() {
+    window.location.href = "index.html";
 }

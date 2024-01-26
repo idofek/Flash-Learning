@@ -48,6 +48,7 @@ function setup() {
 const frenchFlashcards: Flashcard[] = [
   new Flashcard("What does bonjour mean in english?", "Hello"),
   new Flashcard('What is the English translation of "au revoir?', "Goodbye"),
+  /*
   new Flashcard('Translate "merci" to English', "Thank you"),
   new Flashcard('What does "s\'il vous plaît" mean in English?', "Please"),
   new Flashcard(
@@ -59,6 +60,7 @@ const frenchFlashcards: Flashcard[] = [
   new Flashcard('What is the English translation of "non"?', "No"),
   new Flashcard('Translate "comment ça va?" to English', "How are you?"),
   new Flashcard('Translate "aujourd\'hui" to English', "Today"),
+  */
 ];
 
 
@@ -296,6 +298,14 @@ function answerRight() {
     flashcardText.style.display = "none";
   }
 
+  //Hide override
+  let override = document.getElementById("override-button");
+
+  if (override) {
+    override.style.display = "none";
+  }
+
+
   let correctness = document.getElementById("correctness");
 
   if (correctness) {
@@ -333,6 +343,12 @@ function answerWrong() {
     correctText.innerHTML = "Wrong";
     correctText.style.color = "#8B0000";
   }
+
+  let override = document.getElementById("override-button");
+  if (override) {
+    override.style.display = "block";
+  }
+
 }
 
 function checkTranslation() {
@@ -458,7 +474,7 @@ function continueStage3() {
         //If we did then we finish and go to stage 5
         stage = 5;
         //TODO: Set up stage 5
-        window.location.href = "index.html";
+        complete()
       } else {
         stage = 1;
         cardsLearned++;
@@ -510,7 +526,8 @@ function continueStage4() {
       }
     } else if (cardsLearned === frenchFlashcards.length - 1) {
       stage = 5;
-      window.location.href = "index.html";
+      complete();
+      //window.location.href = "index.html";
     } else {
       //TODO
       //Have the user choose if they want to review the cards again or if they want to go straight to a new card
@@ -625,6 +642,12 @@ function transitionToNextPage() {
     correctness.style.display = "none";
   }
 
+  let override = document.getElementById("override-button");
+
+  if (override) {
+    override.style.display = "none";
+  }
+
   //In case we are coming from stage 1
 
   let learning = document.getElementById("learning");
@@ -646,7 +669,12 @@ function transitionToNextPage() {
 
   let title = document.getElementById("transitionTitle");
   let description = document.getElementById("stage-description");
-  if(title && description){
+
+
+    
+
+  if(title && description && currentCard){
+    console.log("Does " + lastInput + " === " + currentCard.answer.toLowerCase());
 
     //Checking if we are in the middle of stage 3
     if(stage === 3 && remainingCards.length > 1){
@@ -667,7 +695,7 @@ function transitionToNextPage() {
         nextButtonClicked();
       }
       
-    }else if(stage === 2 && lastInput === currentCard?.answer.toLowerCase()){
+    }else if(stage === 2 && lastInput === currentCard.answer.toLowerCase()){
 
       title.innerText = "Starting stage 3";
       description.innerText = stage3Description;
@@ -709,6 +737,11 @@ function transitionToNextPage() {
         title.innerText = "Learning a new card";
         description.innerText = "";
         //nextButtonClicked();
+      }
+
+      //Check if the game is finished
+      if(cardsLearned+1 === frenchFlashcards.length){
+        complete();
       }
 
     }else if(stage === 4 && lastInput != currentCard?.answer.toLowerCase()){
@@ -764,4 +797,32 @@ function shuffle(array: Flashcard[]) {
   }
 
   return array;
+}
+
+function override(){
+  if(currentCard){
+    lastInput = currentCard.answer.toLowerCase();
+    answerRight();
+  }else{
+    console.log("Error: currentCard is undefined")
+  }
+  
+}
+
+function complete(){
+  let flashcard = document.getElementById("flashcard");
+
+  if (flashcard) {
+    flashcard.style.display = "none";
+  }
+
+  let completeDiv = document.getElementById("complete");
+
+  if (completeDiv) {
+    completeDiv.style.display = "flex";
+  }
+}
+
+function goHome(){
+  window.location.href = "index.html";
 }
