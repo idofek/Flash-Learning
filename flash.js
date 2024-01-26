@@ -114,6 +114,23 @@ function changeStage12() {
         flashcardText.innerHTML = currentCard.question;
     }
 }
+function changeStageNext2() {
+    console.log("Starting change from stage 1 to stage 2");
+    stage = 2;
+    var nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+        nextPage.style.display = "none";
+    }
+    var answerButtons = document.getElementById("answers");
+    if (answerButtons) {
+        answerButtons.style.display = "flex";
+    }
+    var flashcardText = document.getElementById("flash-question");
+    if (flashcardText && currentCard) {
+        flashcardText.style.display = "flex";
+        flashcardText.innerHTML = currentCard.question;
+    }
+}
 //Changing from stage 2 to 1 if the user got the answer wrong
 function changeStage21Wrong() {
     console.log("Starting change from stage 2 to stage 1");
@@ -449,9 +466,14 @@ function changeStage31() {
         flashcardText.innerHTML = currentCard.question;
     }
 }
+var transition1Counter = 1;
+var transition2Counter = 0;
+var transition3Counter = 0;
+var transition4Counter = 0;
 //When the button in the transition is clicked
 function nextButtonClicked() {
-    if ((stage === 1)) {
+    var title = document.getElementById("transitionTitle");
+    if ((stage === 1 && (title === null || title === void 0 ? void 0 : title.innerText) === "Starting stage 1")) {
         var nextPage = document.getElementById("transitionStage");
         if (nextPage) {
             nextPage.style.display = "none";
@@ -465,6 +487,9 @@ function nextButtonClicked() {
             learningButtons.style.display = "flex";
         }
         setup();
+    }
+    else if (stage === 1) {
+        changeStageNext2();
     }
     else if (stage === 2) {
         continueStage2();
@@ -481,6 +506,15 @@ function transitionToNextPage() {
     if (correctness) {
         correctness.style.display = "none";
     }
+    //In case we are coming from stage 1
+    var learning = document.getElementById("learning");
+    if (learning) {
+        learning.style.display = "none";
+    }
+    var question = document.getElementById("flash-question");
+    if (question) {
+        question.style.display = "none";
+    }
     var nextPage = document.getElementById("transitionStage");
     if (nextPage) {
         nextPage.style.display = "flex";
@@ -496,28 +530,32 @@ function transitionToNextPage() {
         if (stage === 4 && wrongList.length > 1) {
             nextButtonClicked();
         }
-        if (stage === 2 && lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
-            title.innerText = "Starting stage " + (stage + 1);
+        if (stage === 1) {
+            title.innerText = "Starting stage 2";
+            description.innerText = stage2Description;
+        }
+        else if (stage === 2 && lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
+            title.innerText = "Starting stage 3";
             description.innerText = stage3Description;
         }
         else if (stage === 2) {
-            title.innerText = "Starting stage " + (stage - 1);
+            title.innerText = "Starting stage 1";
             description.innerText = stage1Description;
         }
         else if (stage === 3 && (wrongList.length > 0 || lastInput != (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase()))) {
-            title.innerText = "Starting stage " + (stage + 1);
+            title.innerText = "Starting stage 4";
             description.innerText = stage4Description;
         }
         else if (stage === 3 && wrongList.length === 0) {
-            title.innerText = "Starting stage " + (stage - 2);
+            title.innerText = "Starting stage 1";
             description.innerText = stage1Description;
         }
         else if (stage === 4 && lastInput != (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
-            title.innerText = "Staying on stage " + stage;
+            title.innerText = "Staying on stage 4";
             description.innerText = stage4Description;
         }
         else if (stage === 4 && wrongList.length === 1) {
-            title.innerText = "Starting stage " + (stage - 3);
+            title.innerText = "Starting stage 1";
             description.innerText = stage1Description;
         }
         else {

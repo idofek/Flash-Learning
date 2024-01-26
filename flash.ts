@@ -140,6 +140,31 @@ function changeStage12() {
   }
 }
 
+
+function changeStageNext2(){
+  console.log("Starting change from stage 1 to stage 2");
+  stage = 2;
+  let nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+      nextPage.style.display = "none";
+    }
+
+
+  let answerButtons = document.getElementById("answers");
+
+  if (answerButtons) {
+    answerButtons.style.display = "flex";
+  }
+
+  let flashcardText = document.getElementById("flash-question");
+
+
+  if (flashcardText && currentCard) {
+    flashcardText.style.display = "flex";
+    flashcardText.innerHTML = currentCard.question;
+  }
+}
+
 //Changing from stage 2 to 1 if the user got the answer wrong
 function changeStage21Wrong() {
   console.log("Starting change from stage 2 to stage 1");
@@ -547,9 +572,20 @@ function changeStage31() {
   }
 }
 
+let transition1Counter:number = 1;
+let transition2Counter:number = 0;
+let transition3Counter:number = 0;
+let transition4Counter:number = 0;
+
+
+
 //When the button in the transition is clicked
 function nextButtonClicked() {
-  if ((stage === 1)) {
+
+  let title = document.getElementById("transitionTitle");
+
+
+  if ((stage === 1 && title?.innerText === "Starting stage 1")) {
     let nextPage = document.getElementById("transitionStage");
     if (nextPage) {
       nextPage.style.display = "none";
@@ -567,9 +603,11 @@ function nextButtonClicked() {
     }
 
     setup();
-  }else if (stage === 2) {
+  }else if (stage === 1) {
+    changeStageNext2();
+  } else if(stage === 2){
     continueStage2();
-  } else if (stage === 3) {
+  }else if (stage === 3) {
     continueStage3();
   } else if (stage === 4) {
     continueStage4();
@@ -584,6 +622,20 @@ function transitionToNextPage() {
 
   if (correctness) {
     correctness.style.display = "none";
+  }
+
+  //In case we are coming from stage 1
+
+  let learning = document.getElementById("learning");
+
+  if (learning) {
+    learning.style.display = "none";
+  }
+
+  let question = document.getElementById("flash-question");
+
+  if (question) {
+    question.style.display = "none";
   }
 
   let nextPage = document.getElementById("transitionStage");
@@ -605,23 +657,26 @@ function transitionToNextPage() {
       nextButtonClicked();
     }
 
-    if(stage === 2 && lastInput === currentCard?.answer.toLowerCase()){
-      title.innerText = "Starting stage " + (stage + 1);
+    if(stage === 1){
+      title.innerText = "Starting stage 2";
+      description.innerText = stage2Description;
+    }else if(stage === 2 && lastInput === currentCard?.answer.toLowerCase()){
+      title.innerText = "Starting stage 3";
       description.innerText = stage3Description;
     }else if(stage === 2){
-      title.innerText = "Starting stage " + (stage - 1);
+      title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
     }else if(stage === 3 && (wrongList.length > 0 || lastInput != currentCard?.answer.toLowerCase())){
-      title.innerText = "Starting stage " + (stage + 1);
+      title.innerText = "Starting stage 4";
       description.innerText = stage4Description;
     }else if(stage === 3 && wrongList.length === 0){
-      title.innerText = "Starting stage " + (stage - 2);
+      title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
     }else if(stage === 4 && lastInput != currentCard?.answer.toLowerCase()){
-      title.innerText = "Staying on stage " + stage;
+      title.innerText = "Staying on stage 4";
       description.innerText = stage4Description;
     }else if(stage === 4 && wrongList.length === 1){
-      title.innerText = "Starting stage " + (stage - 3);
+      title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
     }
     else{
