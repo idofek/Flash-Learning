@@ -16,13 +16,16 @@ var Flashcard = /** @class */ (function () {
     };
     return Flashcard;
 }());
+/*
 // Add an event listener for the DOMContentLoaded event
-document.addEventListener("DOMContentLoaded", function () {
-    // Call your setup function when the DOM is ready
-    console.log("Setting page up");
-    setup();
-    console.log("Called setup");
+document.addEventListener("DOMContentLoaded", () => {
+  // Call your setup function when the DOM is ready
+  console.log("Setting page up");
+  setup();
+  console.log("Called setup");
 });
+
+*/
 //Function to setup the inital learning page
 function setup() {
     var flashcardText = document.querySelector("#flash-question");
@@ -36,22 +39,21 @@ function setup() {
 }
 //The list of cards that we are going to study
 var frenchFlashcards = [
-    new Flashcard("What does bonjour mean in english?", "hello"),
-    new Flashcard('What is the English translation of "au revoir?', "goodbye"),
-    new Flashcard('Translate "merci" to English', "thank you"),
-    /*
-    new Flashcard('What does "s\'il vous plaît" mean in English?', "please"),
-    new Flashcard(
-      "What does merci beaucoup mean in English?",
-      "thank you very much"
-    ),
-    new Flashcard('Translate "excusez-moi" to English', "excuse me"),
-    new Flashcard('How do you say "yes" in French?', "oui"),
-    new Flashcard('What is the English translation of "non"?', "no"),
-    new Flashcard('Translate "comment ça va?" to English', "how are you?"),
-    new Flashcard('Translate "aujourd\'hui" to English', "today"),
-    */
+    new Flashcard("What does bonjour mean in english?", "Hello"),
+    new Flashcard('What is the English translation of "au revoir?', "Goodbye"),
+    new Flashcard('Translate "merci" to English', "Thank you"),
+    new Flashcard('What does "s\'il vous plaît" mean in English?', "Please"),
+    new Flashcard("What does merci beaucoup mean in English?", "Thank you very much"),
+    new Flashcard('Translate "excusez-moi" to English', "Excuse me"),
+    new Flashcard('How do you say "yes" in French?', "Oui"),
+    new Flashcard('What is the English translation of "non"?', "No"),
+    new Flashcard('Translate "comment ça va?" to English', "How are you?"),
+    new Flashcard('Translate "aujourd\'hui" to English', "Today"),
 ];
+var stage1Description = "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
+var stage2Description = "Stage 2: Initial Recall – Test your memory by typing in the answer to the presented question.";
+var stage3Description = "Stage 3: Comprehensive Review – Review all flashcards, aiming for perfect recall.";
+var stage4Description = "Stage 4: Correcting Mistakes – Address and correct any mistakes made during the review.";
 //This array will have all of the cards that the user has seen and will need to study
 var remainingCards = [];
 //This array will have all of the cards that the user got correct in a certain level
@@ -59,6 +61,7 @@ var correctList = [];
 //This array will have all of the cards that the user got wrong in a certain level
 var wrongList = [];
 var cardsLearned = 0;
+shuffle(frenchFlashcards);
 var currentCard = frenchFlashcards[0];
 var stage = 1;
 var lastInput = "";
@@ -158,6 +161,7 @@ function changeStage21Correct() {
 }
 function changeStage23() {
     stage = 3;
+    shuffle(remainingCards);
     currentCard = remainingCards[0];
     var flashcardText = document.querySelector("#flash-question");
     if (flashcardText && currentCard) {
@@ -175,7 +179,7 @@ function checkTranslationInitial() {
     if (translation && currentCard) {
         console.log(translation.value);
         var text = translation.value.toLowerCase();
-        if (text === currentCard.answer) {
+        if (text === currentCard.answer.toLowerCase()) {
             console.log("Answer is correct");
             translation.value = "";
             answerRight();
@@ -255,27 +259,28 @@ function checkTranslation() {
 //Put back the correct elements
 //Do this by calling changeStage21Correct()
 function continued() {
+    transitionToNextPage();
+    /*
     if (stage === 2) {
-        continueStage2();
+      continueStage2();
+    } else if (stage === 3) {
+      continueStage3();
+    } else if (stage === 4) {
+      continueStage4();
     }
-    else if (stage === 3) {
-        continueStage3();
-    }
-    else if (stage === 4) {
-        continueStage4();
-    }
+    */
 }
 function continueStage2() {
-    var correctness = document.getElementById("correctness");
-    if (correctness) {
-        correctness.style.display = "none";
+    var nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+        nextPage.style.display = "none";
     }
     var flashcardText = document.getElementById("flash-question");
     if (flashcardText) {
         flashcardText.style.display = "block";
     }
     //Not sure if this is okay or not
-    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer);
+    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLocaleLowerCase());
     console.log("Answer is " + answerCorrect);
     if (stage === 2 && answerCorrect === true && currentCard != undefined) {
         //Add the card to the remaining card list
@@ -289,9 +294,9 @@ function continueStage2() {
 }
 function continueStage3() {
     //This is when the user is in the middle of answering all of the remaining flashcards and they get one either right or wrong
-    var correctness = document.getElementById("correctness");
-    if (correctness) {
-        correctness.style.display = "none";
+    var nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+        nextPage.style.display = "none";
     }
     var flashcardText = document.getElementById("flash-question");
     if (flashcardText) {
@@ -302,7 +307,7 @@ function continueStage3() {
         answerButtons.style.display = "flex";
     }
     //Not sure if this is okay or not
-    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer);
+    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLocaleLowerCase());
     console.log("Answer is " + answerCorrect);
     if (answerCorrect && currentCard != undefined) {
         //Push the card to the correct list
@@ -361,9 +366,9 @@ function continueStage3() {
     }
 }
 function continueStage4() {
-    var correctness = document.getElementById("correctness");
-    if (correctness) {
-        correctness.style.display = "none";
+    var nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+        nextPage.style.display = "none";
     }
     var flashcardText = document.getElementById("flash-question");
     if (flashcardText) {
@@ -373,7 +378,7 @@ function continueStage4() {
     if (answerButtons) {
         answerButtons.style.display = "flex";
     }
-    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer);
+    var answerCorrect = lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLocaleLowerCase());
     console.log("Answer is " + answerCorrect);
     if (answerCorrect && currentCard != undefined) {
         //Push the card to the correct list
@@ -444,9 +449,102 @@ function changeStage31() {
         flashcardText.innerHTML = currentCard.question;
     }
 }
+//When the button in the transition is clicked
+function nextButtonClicked() {
+    if ((stage === 1)) {
+        var nextPage = document.getElementById("transitionStage");
+        if (nextPage) {
+            nextPage.style.display = "none";
+        }
+        var flashcardText = document.getElementById("flash-question");
+        if (flashcardText) {
+            flashcardText.style.display = "flex";
+        }
+        var learningButtons = document.getElementById("learning");
+        if (learningButtons) {
+            learningButtons.style.display = "flex";
+        }
+        setup();
+    }
+    else if (stage === 2) {
+        continueStage2();
+    }
+    else if (stage === 3) {
+        continueStage3();
+    }
+    else if (stage === 4) {
+        continueStage4();
+    }
+}
+function transitionToNextPage() {
+    var correctness = document.getElementById("correctness");
+    if (correctness) {
+        correctness.style.display = "none";
+    }
+    var nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+        nextPage.style.display = "flex";
+    }
+    var title = document.getElementById("transitionTitle");
+    var description = document.getElementById("stage-description");
+    if (title && description) {
+        //Checking if we are in the middle of stage 3
+        if (stage === 3 && remainingCards.length > 1) {
+            nextButtonClicked();
+        }
+        //Checking if we are in the middle of stage 4
+        if (stage === 4 && wrongList.length > 1) {
+            nextButtonClicked();
+        }
+        if (stage === 2 && lastInput === (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
+            title.innerText = "Starting stage " + (stage + 1);
+            description.innerText = stage3Description;
+        }
+        else if (stage === 2) {
+            title.innerText = "Starting stage " + (stage - 1);
+            description.innerText = stage1Description;
+        }
+        else if (stage === 3 && (wrongList.length > 0 || lastInput != (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase()))) {
+            title.innerText = "Starting stage " + (stage + 1);
+            description.innerText = stage4Description;
+        }
+        else if (stage === 3 && wrongList.length === 0) {
+            title.innerText = "Starting stage " + (stage - 2);
+            description.innerText = stage1Description;
+        }
+        else if (stage === 4 && lastInput != (currentCard === null || currentCard === void 0 ? void 0 : currentCard.answer.toLowerCase())) {
+            title.innerText = "Staying on stage " + stage;
+            description.innerText = stage4Description;
+        }
+        else if (stage === 4 && wrongList.length === 1) {
+            title.innerText = "Starting stage " + (stage - 3);
+            description.innerText = stage1Description;
+        }
+        else {
+            title.innerText = "Error";
+            description.innerText = "Error";
+        }
+    }
+}
 function moveToDifferentList(newList, oldList) {
     while (oldList.length !== 0) {
         newList.push(oldList[0]);
         oldList.shift();
     }
+}
+function shuffle(array) {
+    var _a;
+    var currentIndex = array.length;
+    var randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        _a = [
+            array[randomIndex], array[currentIndex]
+        ], array[currentIndex] = _a[0], array[randomIndex] = _a[1];
+    }
+    return array;
 }

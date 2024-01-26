@@ -24,6 +24,7 @@ body {
 #flash-question {
   font-family: "Times New Roman", Times, serif;
   margin: 50px;
+  display: none;
 }
 
 #answers {
@@ -62,4 +63,37 @@ body {
 #continued{
   height: 40px;
   width: 80px;
+}
+
+#transitionStage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#changeStage{
+  padding: 10px;
+  font-size: 40px;
+  width: 350px;
+  font-family:'Times New Roman', Times, serif;
+  margin: 20px;
+  background-color: #00B9AE;
+  color: white;
+}
+
+#learning{
+  display: none;
+}
+
+#learning button {
+
+  padding: 10px;
+  margin: 5px;
+  background-color: #a881af;
+  color: #f5f0f6;
+  font-size: 20px;
+}
+
+#stage-description{
+  font-size: 25px;
 }

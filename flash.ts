@@ -21,7 +21,7 @@ class Flashcard {
     return correctAnswer === providedAnswer;
   }
 }
-
+/*
 // Add an event listener for the DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", () => {
   // Call your setup function when the DOM is ready
@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setup();
   console.log("Called setup");
 });
+
+*/
 
 //Function to setup the inital learning page
 function setup() {
@@ -44,22 +46,27 @@ function setup() {
 
 //The list of cards that we are going to study
 const frenchFlashcards: Flashcard[] = [
-  new Flashcard("What does bonjour mean in english?", "hello"),
-  new Flashcard('What is the English translation of "au revoir?', "goodbye"),
-  new Flashcard('Translate "merci" to English', "thank you"),
-  /*
-  new Flashcard('What does "s\'il vous plaît" mean in English?', "please"),
+  new Flashcard("What does bonjour mean in english?", "Hello"),
+  new Flashcard('What is the English translation of "au revoir?', "Goodbye"),
+  new Flashcard('Translate "merci" to English', "Thank you"),
+  new Flashcard('What does "s\'il vous plaît" mean in English?', "Please"),
   new Flashcard(
     "What does merci beaucoup mean in English?",
-    "thank you very much"
+    "Thank you very much"
   ),
-  new Flashcard('Translate "excusez-moi" to English', "excuse me"),
-  new Flashcard('How do you say "yes" in French?', "oui"),
-  new Flashcard('What is the English translation of "non"?', "no"),
-  new Flashcard('Translate "comment ça va?" to English', "how are you?"),
-  new Flashcard('Translate "aujourd\'hui" to English', "today"),
-  */
+  new Flashcard('Translate "excusez-moi" to English', "Excuse me"),
+  new Flashcard('How do you say "yes" in French?', "Oui"),
+  new Flashcard('What is the English translation of "non"?', "No"),
+  new Flashcard('Translate "comment ça va?" to English', "How are you?"),
+  new Flashcard('Translate "aujourd\'hui" to English', "Today"),
 ];
+
+
+const stage1Description = "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
+const stage2Description = "Stage 2: Initial Recall – Test your memory by typing in the answer to the presented question.";
+const stage3Description = "Stage 3: Comprehensive Review – Review all flashcards, aiming for perfect recall.";
+const stage4Description = "Stage 4: Correcting Mistakes – Address and correct any mistakes made during the review.";
+
 
 //This array will have all of the cards that the user has seen and will need to study
 var remainingCards: Flashcard[] = [];
@@ -71,6 +78,7 @@ var correctList: Flashcard[] = [];
 var wrongList: Flashcard[] = [];
 
 var cardsLearned: number = 0;
+shuffle(frenchFlashcards);
 var currentCard: Flashcard | undefined = frenchFlashcards[0];
 var stage: number = 1;
 var lastInput: string = "";
@@ -194,6 +202,7 @@ function changeStage21Correct() {
 
 function changeStage23() {
   stage = 3;
+  shuffle(remainingCards);
   currentCard = remainingCards[0];
 
   let flashcardText = document.querySelector("#flash-question");
@@ -221,7 +230,7 @@ function checkTranslationInitial() {
     console.log(translation.value);
     let text = translation.value.toLowerCase();
 
-    if (text === currentCard.answer) {
+    if (text === currentCard.answer.toLowerCase()) {
       console.log("Answer is correct");
       translation.value = "";
       answerRight();
@@ -314,6 +323,9 @@ function checkTranslation() {
 //Put back the correct elements
 //Do this by calling changeStage21Correct()
 function continued() {
+
+  transitionToNextPage();
+  /*
   if (stage === 2) {
     continueStage2();
   } else if (stage === 3) {
@@ -321,14 +333,14 @@ function continued() {
   } else if (stage === 4) {
     continueStage4();
   }
+  */
 }
 
 function continueStage2() {
-  let correctness = document.getElementById("correctness");
-
-  if (correctness) {
-    correctness.style.display = "none";
-  }
+  let nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+      nextPage.style.display = "none";
+    }
 
   let flashcardText = document.getElementById("flash-question");
   if (flashcardText) {
@@ -336,7 +348,8 @@ function continueStage2() {
   }
 
   //Not sure if this is okay or not
-  var answerCorrect: boolean = lastInput === currentCard?.answer;
+  var answerCorrect: boolean =
+    lastInput === currentCard?.answer.toLocaleLowerCase();
   console.log("Answer is " + answerCorrect);
 
   if (stage === 2 && answerCorrect === true && currentCard != undefined) {
@@ -352,11 +365,10 @@ function continueStage2() {
 function continueStage3() {
   //This is when the user is in the middle of answering all of the remaining flashcards and they get one either right or wrong
 
-  let correctness = document.getElementById("correctness");
-
-  if (correctness) {
-    correctness.style.display = "none";
-  }
+  let nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+      nextPage.style.display = "none";
+    }
 
   let flashcardText = document.getElementById("flash-question");
   if (flashcardText) {
@@ -370,7 +382,8 @@ function continueStage3() {
   }
 
   //Not sure if this is okay or not
-  var answerCorrect: boolean = lastInput === currentCard?.answer;
+  var answerCorrect: boolean =
+    lastInput === currentCard?.answer.toLocaleLowerCase();
   console.log("Answer is " + answerCorrect);
 
   if (answerCorrect && currentCard != undefined) {
@@ -406,7 +419,6 @@ function continueStage3() {
     }
   } else {
     //There are no more cards left in remaining cards
-    
 
     //If there are wrong answers then the user has to get all of them right
     if (wrongList.length != 0) {
@@ -434,11 +446,10 @@ function continueStage3() {
 }
 
 function continueStage4() {
-  let correctness = document.getElementById("correctness");
-
-  if (correctness) {
-    correctness.style.display = "none";
-  }
+  let nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+      nextPage.style.display = "none";
+    }
 
   let flashcardText = document.getElementById("flash-question");
   if (flashcardText) {
@@ -451,7 +462,8 @@ function continueStage4() {
     answerButtons.style.display = "flex";
   }
 
-  var answerCorrect: boolean = lastInput === currentCard?.answer;
+  var answerCorrect: boolean =
+    lastInput === currentCard?.answer.toLocaleLowerCase();
   console.log("Answer is " + answerCorrect);
 
   if (answerCorrect && currentCard != undefined) {
@@ -471,10 +483,10 @@ function continueStage4() {
       if (flashcardText && currentCard) {
         flashcardText.innerHTML = currentCard.question;
       }
-    } else if(cardsLearned === frenchFlashcards.length -1){
+    } else if (cardsLearned === frenchFlashcards.length - 1) {
       stage = 5;
       window.location.href = "index.html";
-    }else {
+    } else {
       //TODO
       //Have the user choose if they want to review the cards again or if they want to go straight to a new card
       //Right now I have it so they can move straight to a new card
@@ -535,9 +547,118 @@ function changeStage31() {
   }
 }
 
+//When the button in the transition is clicked
+function nextButtonClicked() {
+  if ((stage === 1)) {
+    let nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+      nextPage.style.display = "none";
+    }
+
+    let flashcardText = document.getElementById("flash-question");
+    if (flashcardText) {
+      flashcardText.style.display = "flex";
+    }
+
+    let learningButtons = document.getElementById("learning");
+
+    if (learningButtons) {
+      learningButtons.style.display = "flex";
+    }
+
+    setup();
+  }else if (stage === 2) {
+    continueStage2();
+  } else if (stage === 3) {
+    continueStage3();
+  } else if (stage === 4) {
+    continueStage4();
+  }
+  
+
+
+}
+
+function transitionToNextPage() {
+  let correctness = document.getElementById("correctness");
+
+  if (correctness) {
+    correctness.style.display = "none";
+  }
+
+  let nextPage = document.getElementById("transitionStage");
+    if (nextPage) {
+      nextPage.style.display = "flex";
+    }
+
+  let title = document.getElementById("transitionTitle");
+  let description = document.getElementById("stage-description");
+  if(title && description){
+
+    //Checking if we are in the middle of stage 3
+    if(stage === 3 && remainingCards.length > 1){
+      nextButtonClicked();
+    }
+    
+    //Checking if we are in the middle of stage 4
+    if(stage === 4 && wrongList.length > 1){
+      nextButtonClicked();
+    }
+
+    if(stage === 2 && lastInput === currentCard?.answer.toLowerCase()){
+      title.innerText = "Starting stage " + (stage + 1);
+      description.innerText = stage3Description;
+    }else if(stage === 2){
+      title.innerText = "Starting stage " + (stage - 1);
+      description.innerText = stage1Description;
+    }else if(stage === 3 && (wrongList.length > 0 || lastInput != currentCard?.answer.toLowerCase())){
+      title.innerText = "Starting stage " + (stage + 1);
+      description.innerText = stage4Description;
+    }else if(stage === 3 && wrongList.length === 0){
+      title.innerText = "Starting stage " + (stage - 2);
+      description.innerText = stage1Description;
+    }else if(stage === 4 && lastInput != currentCard?.answer.toLowerCase()){
+      title.innerText = "Staying on stage " + stage;
+      description.innerText = stage4Description;
+    }else if(stage === 4 && wrongList.length === 1){
+      title.innerText = "Starting stage " + (stage - 3);
+      description.innerText = stage1Description;
+    }
+    else{
+      title.innerText = "Error";
+      description.innerText = "Error";
+    }
+
+    
+    
+  }
+  
+
+
+}
+
 function moveToDifferentList(newList: Flashcard[], oldList: Flashcard[]) {
   while (oldList.length !== 0) {
     newList.push(oldList[0]!);
     oldList.shift();
   }
+}
+
+function shuffle(array: Flashcard[]) {
+  let currentIndex:number = array.length;
+  let randomIndex:number;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex]!, array[randomIndex]!] = [
+      array[randomIndex]!, array[currentIndex]!];
+  }
+
+  return array;
 }
