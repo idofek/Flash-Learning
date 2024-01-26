@@ -618,6 +618,7 @@ function nextButtonClicked() {
 }
 
 function transitionToNextPage() {
+
   let correctness = document.getElementById("correctness");
 
   if (correctness) {
@@ -660,36 +661,83 @@ function transitionToNextPage() {
     if(stage === 1){
       title.innerText = "Starting stage 2";
       description.innerText = stage2Description;
+      transition2Counter++;
+
+      if(transition2Counter > 2){
+        nextButtonClicked();
+      }
+      
     }else if(stage === 2 && lastInput === currentCard?.answer.toLowerCase()){
+
       title.innerText = "Starting stage 3";
       description.innerText = stage3Description;
+      transition3Counter++;
+
+      if(transition3Counter > 2){
+        nextButtonClicked();
+      }
+
     }else if(stage === 2){
+
       title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
+      transition1Counter++;
+
+      if(transition1Counter > 2){
+        //title.innerText = "Learning a new card";
+        nextButtonClicked();
+      }
+
     }else if(stage === 3 && (wrongList.length > 0 || lastInput != currentCard?.answer.toLowerCase())){
+
       title.innerText = "Starting stage 4";
       description.innerText = stage4Description;
+      transition4Counter++;
+
+      if(transition4Counter > 2){
+        title.innerText = "Reviewing missed flashcards";
+        description.innerText = "";
+        //nextButtonClicked();
+      }
+
     }else if(stage === 3 && wrongList.length === 0){
       title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
+      transition1Counter++;
+
+      if(transition1Counter > 2){
+        title.innerText = "Learning a new card";
+        description.innerText = "";
+        //nextButtonClicked();
+      }
+
     }else if(stage === 4 && lastInput != currentCard?.answer.toLowerCase()){
       title.innerText = "Staying on stage 4";
       description.innerText = stage4Description;
+      transition4Counter++;
+
+      if(transition4Counter > 2){
+        description.innerText = "";
+        //nextButtonClicked();
+      }
+
     }else if(stage === 4 && wrongList.length === 1){
       title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
+      transition1Counter++;
+
+      if(transition1Counter > 2){
+        title.innerText = "Learning a new card";
+        description.innerText = "";
+        //nextButtonClicked();
+      }
+
     }
     else{
       title.innerText = "Error";
       description.innerText = "Error";
     }
-
-    
-    
   }
-  
-
-
 }
 
 function moveToDifferentList(newList: Flashcard[], oldList: Flashcard[]) {
