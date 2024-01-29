@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (flashcardString === "geographyFlashcards") {
         flashcardSet = geographyFlashcards;
     }
+    shuffle(flashcardSet);
     currentCard = flashcardSet[0];
 });
 var stage1Description = "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
@@ -134,7 +135,7 @@ var correctList = [];
 //This array will have all of the cards that the user got wrong in a certain level
 var wrongList = [];
 var cardsLearned = 0;
-shuffle(flashcardSet);
+//shuffle(flashcardSet);
 var currentCard = flashcardSet[0];
 var stage = 1;
 var lastInput = "";

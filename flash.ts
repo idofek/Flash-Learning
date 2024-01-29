@@ -139,6 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
     flashcardSet = geographyFlashcards;
   }
 
+
+  shuffle(flashcardSet);
   currentCard = flashcardSet[0];
   
 });
@@ -160,7 +162,7 @@ var correctList: Flashcard[] = [];
 var wrongList: Flashcard[] = [];
 
 var cardsLearned: number = 0;
-shuffle(flashcardSet);
+//shuffle(flashcardSet);
 var currentCard: Flashcard | undefined = flashcardSet[0];
 var stage: number = 1;
 var lastInput: string = "";
