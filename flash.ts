@@ -32,13 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 */
 
+
+
+
 //Function to setup the inital learning page
 function setup() {
   let flashcardText = document.querySelector("#flash-question");
 
-  if (flashcardText !== null && frenchFlashcards[0] != null) {
-    flashcardText.innerHTML = frenchFlashcards[0].question;
-    console.log(frenchFlashcards[0].question);
+  if (flashcardText !== null && flashcardSet[0] != null) {
+    flashcardText.innerHTML = flashcardSet[0].question;
+    console.log(flashcardSet[0].question);
   } else {
     console.error("Element with id 'flash-question' not found");
   }
@@ -48,7 +51,6 @@ function setup() {
 const frenchFlashcards: Flashcard[] = [
   new Flashcard("What does bonjour mean in english?", "Hello"),
   new Flashcard('What is the English translation of "au revoir?', "Goodbye"),
-  /*
   new Flashcard('Translate "merci" to English', "Thank you"),
   new Flashcard('What does "s\'il vous plaît" mean in English?', "Please"),
   new Flashcard(
@@ -60,8 +62,86 @@ const frenchFlashcards: Flashcard[] = [
   new Flashcard('What is the English translation of "non"?', "No"),
   new Flashcard('Translate "comment ça va?" to English', "How are you?"),
   new Flashcard('Translate "aujourd\'hui" to English', "Today"),
-  */
 ];
+
+const historyFlashcards: Flashcard[] = [
+  new Flashcard("Who was the first President of the United States?", "George Washington"),
+  new Flashcard("When did World War II end?", "September 2, 1945"),
+  new Flashcard("Name the ancient wonder of the world that still exists today.", "The Great Pyramid of Giza"),
+  new Flashcard("Which empire was ruled by Julius Caesar?", "Roman Empire"),
+  new Flashcard("When did the Industrial Revolution begin?", "18th century (around 1760)"),
+  new Flashcard("Who was the leader of the Soviet Union during the Cuban Missile Crisis?", "Nikita Khrushchev"),
+  new Flashcard("What was the significance of the Magna Carta?", "It limited the power of the monarchy and established the principle that the king is subject to the law."),
+  new Flashcard("Who wrote the Declaration of Independence?", "Thomas Jefferson"),
+  new Flashcard("What was the Renaissance?", "A period of cultural, artistic, and intellectual rebirth in Europe from the 14th to the 17th century."),
+  new Flashcard("When did the American Civil War take place?", "1861-1865")
+];
+
+const chemistryFlashcards: Flashcard[] = [
+  new Flashcard("What is the chemical symbol for water?", "H2O"),
+  new Flashcard("Define oxidation.", "The loss of electrons by a molecule, atom, or ion."),
+  new Flashcard("What is Avogadro's number?", "6.022 x 10^23 (The number of atoms, ions, or molecules in one mole of a substance.)"),
+  new Flashcard("Name the noble gases.", "Helium, Neon, Argon, Krypton, Xenon, Radon"),
+  new Flashcard("What is the pH scale used to measure?", "Acidity or alkalinity of a solution."),
+  new Flashcard("What is the periodic table?", "A tabular arrangement of the chemical elements, organized by their atomic number, electron configuration, and recurring chemical properties."),
+  new Flashcard("Define exothermic reaction.", "A chemical reaction that releases energy to its surroundings."),
+  new Flashcard("What is the most abundant gas in Earth's atmosphere?", "Nitrogen"),
+  new Flashcard("Name the three states of matter.", "Solid, Liquid, Gas"),
+  new Flashcard("What is the chemical symbol for gold?", "Au")
+];
+
+const physicsFlashcards: Flashcard[] = [
+  new Flashcard("What is Newton's First Law of Motion?", "An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced external force."),
+  new Flashcard("Define velocity.", "The rate of change of displacement with respect to time."),
+  new Flashcard("What is the formula for calculating kinetic energy?", "KE = 0.5 * m * v^2"),
+  new Flashcard("Explain the concept of inertia.", "The tendency of an object to resist changes in its state of motion."),
+  new Flashcard("What is the unit of measurement for force?", "Newton (N)"),
+  new Flashcard("State the law of conservation of energy.", "Energy cannot be created or destroyed, only transferred or converted from one form to another."),
+  new Flashcard("What is the SI unit of electric current?", "Ampere (A)"),
+  new Flashcard("Define frequency in the context of waves.", "The number of cycles of a periodic wave that occur in a unit of time."),
+  new Flashcard("What is the formula for calculating work?", "Work = Force * Distance * cos(θ)"),
+  new Flashcard("Explain the concept of gravity.", "The force of attraction between two masses.")
+];
+
+const geographyFlashcards: Flashcard[] = [
+  new Flashcard("What is the capital of Japan?", "Tokyo"),
+  new Flashcard("Name the five oceans.", "Pacific Ocean, Atlantic Ocean, Indian Ocean, Southern Ocean, Arctic Ocean"),
+  new Flashcard("Which river is the longest in the world?", "Nile River"),
+  new Flashcard("What is the capital of Australia?", "Canberra"),
+  new Flashcard("Name the seven wonders of the ancient world.", "Great Pyramid of Giza, Hanging Gardens of Babylon, Statue of Zeus at Olympia, Temple of Artemis at Ephesus, Mausoleum at Halicarnassus, Colossus of Rhodes, Lighthouse of Alexandria"),
+  new Flashcard("What is the largest desert in the world?", "Antarctica (Cold Desert)"),
+  new Flashcard("Which mountain range is the longest in the world?", "Andes"),
+  new Flashcard("Name the countries that make up the United Kingdom.", "England, Scotland, Wales, Northern Ireland"),
+  new Flashcard("What is the capital of Brazil?", "Brasília"),
+  new Flashcard("What is the Equator?", "An imaginary line that circles the Earth, dividing it into the Northern Hemisphere and the Southern Hemisphere.")
+];
+
+const errorFlashcards: Flashcard[] = [
+  new Flashcard("Error", "Error"),
+];
+
+//This will be the main flashcard set
+let flashcardSet: Flashcard[] = errorFlashcards;
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Setting page up");
+  let flashcardString = localStorage.getItem("flashcardSet")
+  if(flashcardString === "frenchFlashcards"){
+    flashcardSet = frenchFlashcards;
+  }else if (flashcardString === "historyFlashcards"){
+    flashcardSet = historyFlashcards;
+  }else if(flashcardString === "chemistryFlashcards"){
+    flashcardSet = chemistryFlashcards;
+  }else if(flashcardString === "physicsFlashcards"){
+    flashcardSet = physicsFlashcards;
+  }else if(flashcardString === "geographyFlashcards"){
+    flashcardSet = geographyFlashcards;
+  }
+
+  currentCard = flashcardSet[0];
+  
+});
 
 
 const stage1Description = "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
@@ -80,8 +160,8 @@ var correctList: Flashcard[] = [];
 var wrongList: Flashcard[] = [];
 
 var cardsLearned: number = 0;
-shuffle(frenchFlashcards);
-var currentCard: Flashcard | undefined = frenchFlashcards[0];
+shuffle(flashcardSet);
+var currentCard: Flashcard | undefined = flashcardSet[0];
 var stage: number = 1;
 var lastInput: string = "";
 
@@ -109,7 +189,10 @@ var lastInput: string = "";
 //Used to change the text shown from question to anser or answer to question
 function flip() {
   let flashcardText = document.querySelector("#flash-question");
+ 
   if (flashcardText && currentCard) {
+    console.log(flashcardText.innerHTML);
+    console.log(currentCard.question);
     if (flashcardText.innerHTML === currentCard.question) {
       flashcardText.innerHTML = currentCard.answer;
     } else if (flashcardText?.innerHTML === currentCard?.answer) {
@@ -211,13 +294,13 @@ function changeStage21Correct() {
 
   //Updating the current question
   if (
-    cardsLearned <= frenchFlashcards.length &&
-    frenchFlashcards[cardsLearned] !== undefined
+    cardsLearned <= flashcardSet.length &&
+    flashcardSet[cardsLearned] !== undefined
   ) {
-    currentCard = frenchFlashcards[cardsLearned];
+    currentCard = flashcardSet[cardsLearned];
   } else {
     console.log("Reached the last question");
-    console.log(`${cardsLearned}>${frenchFlashcards.length}`);
+    console.log(`${cardsLearned}>${flashcardSet.length}`);
   }
 
   let flashcardText = document.querySelector("#flash-question");
@@ -265,7 +348,7 @@ function checkTranslationInitial() {
           if(cardsLearned === 0){
             //If the user just finised learning the first card
             changeStage21Correct();
-          }else if(cardsLearned === frenchFlashcards.length - 1){
+          }else if(cardsLearned === flashcardSet.length - 1){
             //Learned the last card
               window.location.href = "index.html";
           }else{
@@ -470,7 +553,7 @@ function continueStage3() {
       //If there are no wrong answers then the user can move onto a new card
 
       //Check if we learned all of the cards
-      if (cardsLearned === frenchFlashcards.length - 1) {
+      if (cardsLearned === flashcardSet.length - 1) {
         //If we did then we finish and go to stage 5
         stage = 5;
         //TODO: Set up stage 5
@@ -479,7 +562,7 @@ function continueStage3() {
         stage = 1;
         cardsLearned++;
         moveToDifferentList(remainingCards, correctList);
-        currentCard = frenchFlashcards[cardsLearned];
+        currentCard = flashcardSet[cardsLearned];
         changeStage31();
       }
     }
@@ -524,7 +607,7 @@ function continueStage4() {
       if (flashcardText && currentCard) {
         flashcardText.innerHTML = currentCard.question;
       }
-    } else if (cardsLearned === frenchFlashcards.length - 1) {
+    } else if (cardsLearned === flashcardSet.length - 1) {
       stage = 5;
       complete();
       //window.location.href = "index.html";
@@ -536,7 +619,7 @@ function continueStage4() {
       stage = 1;
       moveToDifferentList(remainingCards, correctList);
       cardsLearned++;
-      currentCard = frenchFlashcards[cardsLearned];
+      currentCard = flashcardSet[cardsLearned];
       changeStage31();
     }
   } else if (currentCard != undefined) {
@@ -740,7 +823,7 @@ function transitionToNextPage() {
       }
 
       //Check if the game is finished
-      if(cardsLearned+1 === frenchFlashcards.length){
+      if(cardsLearned+1 === flashcardSet.length){
         complete();
       }
 

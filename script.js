@@ -38,6 +38,13 @@ const frenchFlashcards = [
   new Flashcard("What does \"s\'il vous plaît\" mean in English?","please"),
 ]
 
+
+function selectFlashcardSet(){
+  window.location.href = "selection.html";
+}
+
+
+
 function learn() {
   /*
     const buttonElement = document.querySelector('.Js-Start-Learning');
