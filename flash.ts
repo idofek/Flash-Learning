@@ -390,6 +390,20 @@ function answerRight() {
     override.style.display = "none";
   }
 
+  //Hide correct and wrong answer text
+
+  let userAnswer = document.getElementById("userAnswer");
+  if (userAnswer) {
+    userAnswer.style.display = "none";
+    userAnswer.innerHTML = "User answer: " + lastInput;
+  }
+
+  let rightAnswer = document.getElementById("correctAnswer");
+  if (rightAnswer && currentCard) {
+    rightAnswer.style.display = "none";
+    rightAnswer.innerHTML = "Correct answer: " + currentCard.answer;
+  }
+
 
   let correctness = document.getElementById("correctness");
 
@@ -428,6 +442,19 @@ function answerWrong() {
     correctText.innerHTML = "Wrong";
     correctText.style.color = "#8B0000";
   }
+
+  let userAnswer = document.getElementById("userAnswer");
+  if (userAnswer) {
+    userAnswer.style.display = "flex";
+    userAnswer.innerHTML = "User answer: " + lastInput;
+  }
+
+  let rightAnswer = document.getElementById("correctAnswer");
+  if (rightAnswer && currentCard) {
+    rightAnswer.style.display = "flex";
+    rightAnswer.innerHTML = "Correct answer: " + currentCard.answer;
+  }
+
 
   let override = document.getElementById("override-button");
   if (override) {
@@ -764,14 +791,10 @@ function transitionToNextPage() {
     //Checking if we are in the middle of stage 3
     if(stage === 3 && remainingCards.length > 1){
       nextButtonClicked();
-    }
-    
-    //Checking if we are in the middle of stage 4
-    if(stage === 4 && wrongList.length > 1){
+    }else if(stage === 4 && wrongList.length > 1){
+      //Checking if we are in the middle of stage 4
       nextButtonClicked();
-    }
-
-    if(stage === 1){
+    } else if(stage === 1){
       title.innerText = "Starting stage 2";
       description.innerText = stage2Description;
       transition2Counter++;

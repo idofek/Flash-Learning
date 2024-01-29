@@ -130,3 +130,7 @@ body {
   font-size: 20px;
   background-color: white;
 }
+
+#correctness p{
+  margin: 0px;
+}
