@@ -134,3 +134,27 @@ body {
 #correctness p{
   margin: 0px;
 }
+
+#stage4complete{
+  display: none;
+  flex-direction: column;
+}
+
+#stage4complete h1{
+  margin: 20px 50px;
+  font-size: 60px;
+}
+
+#stage4complete h3{
+  margin: 20px 50px;
+  font-size: 40px;
+}
+
+
+#stage4complete button{
+  margin: 20px 50px;
+  font-size: 30px;
+  background-color: #c9ad9d;
+  border-radius: 8px;
+  padding: 10px;
+}

@@ -1,49 +1,10 @@
+//Flashcard class that is used by the project to store both a question and answer string
 class Flashcard {
   question: string;
   answer: string;
   constructor(question: string, answer: string) {
     this.question = question;
     this.answer = answer;
-  }
-
-  getQuestion() {
-    return this.question;
-  }
-
-  getAnswer() {
-    return this.answer;
-  }
-
-  isCorrect(userAnswer: string) {
-    const correctAnswer = this.answer.toLowerCase();
-    const providedAnswer = userAnswer.toLowerCase();
-
-    return correctAnswer === providedAnswer;
-  }
-}
-/*
-// Add an event listener for the DOMContentLoaded event
-document.addEventListener("DOMContentLoaded", () => {
-  // Call your setup function when the DOM is ready
-  console.log("Setting page up");
-  setup();
-  console.log("Called setup");
-});
-
-*/
-
-
-
-
-//Function to setup the inital learning page
-function setup() {
-  let flashcardText = document.querySelector("#flash-question");
-
-  if (flashcardText !== null && flashcardSet[0] != null) {
-    flashcardText.innerHTML = flashcardSet[0].question;
-    console.log(flashcardSet[0].question);
-  } else {
-    console.error("Element with id 'flash-question' not found");
   }
 }
 
@@ -65,92 +26,175 @@ const frenchFlashcards: Flashcard[] = [
 ];
 
 const historyFlashcards: Flashcard[] = [
-  new Flashcard("Who was the first President of the United States?", "George Washington"),
+  new Flashcard(
+    "Who was the first President of the United States?",
+    "George Washington"
+  ),
   new Flashcard("When did World War II end?", "September 2, 1945"),
-  new Flashcard("Name the ancient wonder of the world that still exists today.", "The Great Pyramid of Giza"),
+  new Flashcard(
+    "Name the ancient wonder of the world that still exists today.",
+    "The Great Pyramid of Giza"
+  ),
   new Flashcard("Which empire was ruled by Julius Caesar?", "Roman Empire"),
-  new Flashcard("When did the Industrial Revolution begin?", "18th century (around 1760)"),
-  new Flashcard("Who was the leader of the Soviet Union during the Cuban Missile Crisis?", "Nikita Khrushchev"),
-  new Flashcard("What was the significance of the Magna Carta?", "It limited the power of the monarchy and established the principle that the king is subject to the law."),
-  new Flashcard("Who wrote the Declaration of Independence?", "Thomas Jefferson"),
-  new Flashcard("What was the Renaissance?", "A period of cultural, artistic, and intellectual rebirth in Europe from the 14th to the 17th century."),
-  new Flashcard("When did the American Civil War take place?", "1861-1865")
+  new Flashcard(
+    "When did the Industrial Revolution begin?",
+    "18th century (around 1760)"
+  ),
+  new Flashcard(
+    "Who was the leader of the Soviet Union during the Cuban Missile Crisis?",
+    "Nikita Khrushchev"
+  ),
+  new Flashcard(
+    "What was the significance of the Magna Carta?",
+    "It limited the power of the monarchy and established the principle that the king is subject to the law."
+  ),
+  new Flashcard(
+    "Who wrote the Declaration of Independence?",
+    "Thomas Jefferson"
+  ),
+  new Flashcard(
+    "What was the Renaissance?",
+    "A period of cultural, artistic, and intellectual rebirth in Europe from the 14th to the 17th century."
+  ),
+  new Flashcard("When did the American Civil War take place?", "1861-1865"),
 ];
 
 const chemistryFlashcards: Flashcard[] = [
   new Flashcard("What is the chemical symbol for water?", "H2O"),
-  new Flashcard("Define oxidation.", "The loss of electrons by a molecule, atom, or ion."),
-  new Flashcard("What is Avogadro's number?", "6.022 x 10^23 (The number of atoms, ions, or molecules in one mole of a substance.)"),
-  new Flashcard("Name the noble gases.", "Helium, Neon, Argon, Krypton, Xenon, Radon"),
-  new Flashcard("What is the pH scale used to measure?", "Acidity or alkalinity of a solution."),
-  new Flashcard("What is the periodic table?", "A tabular arrangement of the chemical elements, organized by their atomic number, electron configuration, and recurring chemical properties."),
-  new Flashcard("Define exothermic reaction.", "A chemical reaction that releases energy to its surroundings."),
-  new Flashcard("What is the most abundant gas in Earth's atmosphere?", "Nitrogen"),
+  new Flashcard(
+    "Define oxidation.",
+    "The loss of electrons by a molecule, atom, or ion."
+  ),
+  new Flashcard(
+    "What is Avogadro's number?",
+    "6.022 x 10^23 (The number of atoms, ions, or molecules in one mole of a substance.)"
+  ),
+  new Flashcard(
+    "Name the noble gases.",
+    "Helium, Neon, Argon, Krypton, Xenon, Radon"
+  ),
+  new Flashcard(
+    "What is the pH scale used to measure?",
+    "Acidity or alkalinity of a solution."
+  ),
+  new Flashcard(
+    "What is the periodic table?",
+    "A tabular arrangement of the chemical elements, organized by their atomic number, electron configuration, and recurring chemical properties."
+  ),
+  new Flashcard(
+    "Define exothermic reaction.",
+    "A chemical reaction that releases energy to its surroundings."
+  ),
+  new Flashcard(
+    "What is the most abundant gas in Earth's atmosphere?",
+    "Nitrogen"
+  ),
   new Flashcard("Name the three states of matter.", "Solid, Liquid, Gas"),
-  new Flashcard("What is the chemical symbol for gold?", "Au")
+  new Flashcard("What is the chemical symbol for gold?", "Au"),
 ];
 
 const physicsFlashcards: Flashcard[] = [
-  new Flashcard("What is Newton's First Law of Motion?", "An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced external force."),
-  new Flashcard("Define velocity.", "The rate of change of displacement with respect to time."),
-  new Flashcard("What is the formula for calculating kinetic energy?", "KE = 0.5 * m * v^2"),
-  new Flashcard("Explain the concept of inertia.", "The tendency of an object to resist changes in its state of motion."),
+  new Flashcard(
+    "What is Newton's First Law of Motion?",
+    "An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced external force."
+  ),
+  new Flashcard(
+    "Define velocity.",
+    "The rate of change of displacement with respect to time."
+  ),
+  new Flashcard(
+    "What is the formula for calculating kinetic energy?",
+    "KE = 0.5 * m * v^2"
+  ),
+  new Flashcard(
+    "Explain the concept of inertia.",
+    "The tendency of an object to resist changes in its state of motion."
+  ),
   new Flashcard("What is the unit of measurement for force?", "Newton (N)"),
-  new Flashcard("State the law of conservation of energy.", "Energy cannot be created or destroyed, only transferred or converted from one form to another."),
+  new Flashcard(
+    "State the law of conservation of energy.",
+    "Energy cannot be created or destroyed, only transferred or converted from one form to another."
+  ),
   new Flashcard("What is the SI unit of electric current?", "Ampere (A)"),
-  new Flashcard("Define frequency in the context of waves.", "The number of cycles of a periodic wave that occur in a unit of time."),
-  new Flashcard("What is the formula for calculating work?", "Work = Force * Distance * cos(θ)"),
-  new Flashcard("Explain the concept of gravity.", "The force of attraction between two masses.")
+  new Flashcard(
+    "Define frequency in the context of waves.",
+    "The number of cycles of a periodic wave that occur in a unit of time."
+  ),
+  new Flashcard(
+    "What is the formula for calculating work?",
+    "Work = Force * Distance * cos(θ)"
+  ),
+  new Flashcard(
+    "Explain the concept of gravity.",
+    "The force of attraction between two masses."
+  ),
 ];
 
 const geographyFlashcards: Flashcard[] = [
   new Flashcard("What is the capital of Japan?", "Tokyo"),
-  new Flashcard("Name the five oceans.", "Pacific Ocean, Atlantic Ocean, Indian Ocean, Southern Ocean, Arctic Ocean"),
+  new Flashcard(
+    "Name the five oceans.",
+    "Pacific Ocean, Atlantic Ocean, Indian Ocean, Southern Ocean, Arctic Ocean"
+  ),
   new Flashcard("Which river is the longest in the world?", "Nile River"),
   new Flashcard("What is the capital of Australia?", "Canberra"),
-  new Flashcard("Name the seven wonders of the ancient world.", "Great Pyramid of Giza, Hanging Gardens of Babylon, Statue of Zeus at Olympia, Temple of Artemis at Ephesus, Mausoleum at Halicarnassus, Colossus of Rhodes, Lighthouse of Alexandria"),
-  new Flashcard("What is the largest desert in the world?", "Antarctica (Cold Desert)"),
+  new Flashcard(
+    "Name the seven wonders of the ancient world.",
+    "Great Pyramid of Giza, Hanging Gardens of Babylon, Statue of Zeus at Olympia, Temple of Artemis at Ephesus, Mausoleum at Halicarnassus, Colossus of Rhodes, Lighthouse of Alexandria"
+  ),
+  new Flashcard(
+    "What is the largest desert in the world?",
+    "Antarctica (Cold Desert)"
+  ),
   new Flashcard("Which mountain range is the longest in the world?", "Andes"),
-  new Flashcard("Name the countries that make up the United Kingdom.", "England, Scotland, Wales, Northern Ireland"),
+  new Flashcard(
+    "Name the countries that make up the United Kingdom.",
+    "England, Scotland, Wales, Northern Ireland"
+  ),
   new Flashcard("What is the capital of Brazil?", "Brasília"),
-  new Flashcard("What is the Equator?", "An imaginary line that circles the Earth, dividing it into the Northern Hemisphere and the Southern Hemisphere.")
+  new Flashcard(
+    "What is the Equator?",
+    "An imaginary line that circles the Earth, dividing it into the Northern Hemisphere and the Southern Hemisphere."
+  ),
 ];
 
-const errorFlashcards: Flashcard[] = [
-  new Flashcard("Error", "Error"),
-];
+const errorFlashcards: Flashcard[] = [new Flashcard("Error", "Error")];
 
-//This will be the main flashcard set
+//This will be the main flashcard set which is initially set to error
 let flashcardSet: Flashcard[] = errorFlashcards;
 
-
+//Function that runs when the page is first loaded
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Setting page up");
-  let flashcardString = localStorage.getItem("flashcardSet")
-  if(flashcardString === "frenchFlashcards"){
+  let flashcardString = localStorage.getItem("flashcardSet");
+  //Setting flashcardSet to the correct set
+  if (flashcardString === "frenchFlashcards") {
     flashcardSet = frenchFlashcards;
-  }else if (flashcardString === "historyFlashcards"){
+  } else if (flashcardString === "historyFlashcards") {
     flashcardSet = historyFlashcards;
-  }else if(flashcardString === "chemistryFlashcards"){
+  } else if (flashcardString === "chemistryFlashcards") {
     flashcardSet = chemistryFlashcards;
-  }else if(flashcardString === "physicsFlashcards"){
+  } else if (flashcardString === "physicsFlashcards") {
     flashcardSet = physicsFlashcards;
-  }else if(flashcardString === "geographyFlashcards"){
+  } else if (flashcardString === "geographyFlashcards") {
     flashcardSet = geographyFlashcards;
   }
 
-
+  //Shuffling flashcardsSet
   shuffle(flashcardSet);
+  //Setting the current card to the first card
   currentCard = flashcardSet[0];
-  
 });
 
-
-const stage1Description = "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
-const stage2Description = "Stage 2: Initial Recall – Test your memory by typing in the answer to the presented question.";
-const stage3Description = "Stage 3: Comprehensive Review – Review all flashcards, aiming for perfect recall.";
-const stage4Description = "Stage 4: Correcting Mistakes – Address and correct any mistakes made during the review.";
-
+//Creating descriptions for all of the stage transitions
+const stage1Description =
+  "Stage 1: Introducing New Cards – Familiarize yourself with a new flashcard pair.";
+const stage2Description =
+  "Stage 2: Initial Recall – Test your memory by typing in the answer to the presented question.";
+const stage3Description =
+  "Stage 3: Comprehensive Review – Review all flashcards, aiming for perfect recall.";
+const stage4Description =
+  "Stage 4: Correcting Mistakes – Address and correct any mistakes made during the review.";
 
 //This array will have all of the cards that the user has seen and will need to study
 var remainingCards: Flashcard[] = [];
@@ -191,13 +235,15 @@ var lastInput: string = "";
 //Used to change the text shown from question to anser or answer to question
 function flip() {
   let flashcardText = document.querySelector("#flash-question");
- 
+
   if (flashcardText && currentCard) {
     console.log(flashcardText.innerHTML);
     console.log(currentCard.question);
+    //If the flashcard is currently showing the question then show the answer
     if (flashcardText.innerHTML === currentCard.question) {
       flashcardText.innerHTML = currentCard.answer;
-    } else if (flashcardText?.innerHTML === currentCard?.answer) {
+    } else if (flashcardText.innerHTML === currentCard.answer) {
+      //If the flashcard is currently showing the answer then show the question
       flashcardText.innerHTML = currentCard.question;
     }
   }
@@ -208,44 +254,28 @@ function changeStage12() {
   console.log("Starting change from stage 1 to stage 2");
   stage = 2;
   console.log("New stage: " + stage);
-  let learningButtons = document.getElementById("learning");
 
-  if (learningButtons) {
-    learningButtons.style.display = "none";
-  }
+  //Hides the buttons used for learning
+  hideLearningButtons();
 
-  let answerButtons = document.getElementById("answers");
-
-  if (answerButtons) {
-    answerButtons.style.display = "flex";
-  }
-
-  let flashcardText = document.querySelector("#flash-question");
-
-  if (flashcardText && currentCard) {
-    flashcardText.innerHTML = currentCard.question;
-  }
+  //Shows the answer button
+  showAnswerButtons();
+  //Shows the flashcard question
+  showFlashcardQuestion();
 }
 
-
-function changeStageNext2(){
+//Changes the flashcard from the next page to the two page
+function changeStageNext2() {
   console.log("Starting change from stage 1 to stage 2");
   stage = 2;
-  let nextPage = document.getElementById("transitionStage");
-    if (nextPage) {
-      nextPage.style.display = "none";
-    }
+  //Hides the next page
+  hideNextPage();
 
+  //Shows the answer buttons
+  showAnswerButtons();
 
-  let answerButtons = document.getElementById("answers");
-
-  if (answerButtons) {
-    answerButtons.style.display = "flex";
-  }
-
+  //Shows the question and updates the html so it shows the current question
   let flashcardText = document.getElementById("flash-question");
-
-
   if (flashcardText && currentCard) {
     flashcardText.style.display = "flex";
     flashcardText.innerHTML = currentCard.question;
@@ -257,20 +287,14 @@ function changeStage21Wrong() {
   console.log("Starting change from stage 2 to stage 1");
   stage = 1;
 
-  let answerButtons = document.getElementById("answers");
+  //Hide answer buttons
+  hideAnswerButtons();
 
-  if (answerButtons) {
-    answerButtons.style.display = "none";
-  }
+  //Show learning buttons
+  showLearningButtons();
 
-  let learningButtons = document.getElementById("learning");
-
-  if (learningButtons) {
-    learningButtons.style.display = "flex";
-  }
-
+  //Update text
   let flashcardText = document.querySelector("#flash-question");
-
   if (flashcardText && currentCard) {
     flashcardText.innerHTML = currentCard.question;
   }
@@ -280,19 +304,12 @@ function changeStage21Wrong() {
 function changeStage21Correct() {
   console.log("Starting change from stage 2 to stage 1");
   stage = 1;
-  let answerButtons = document.getElementById("answers");
 
-  if (answerButtons) {
-    answerButtons.style.display = "none";
-  }
+  //Hide answer buttons
+  hideAnswerButtons();
 
-  let learningButtons = document.getElementById("learning");
-
-  if (learningButtons) {
-    learningButtons.style.display = "flex";
-  }
-  //Updating the cards learned count
-  //cardsLearned++;
+  //Show learning buttons
+  showLearningButtons();
 
   //Updating the current question
   if (
@@ -306,7 +323,6 @@ function changeStage21Correct() {
   }
 
   let flashcardText = document.querySelector("#flash-question");
-
   if (flashcardText && currentCard) {
     flashcardText.innerHTML = currentCard.question;
   }
@@ -317,21 +333,18 @@ function changeStage23() {
   shuffle(remainingCards);
   currentCard = remainingCards[0];
 
+  //Update the flashcard text
   let flashcardText = document.querySelector("#flash-question");
-
   if (flashcardText && currentCard) {
     flashcardText.innerHTML = currentCard.question;
   }
 
-  let answerButtons = document.getElementById("answers");
-
-  if (answerButtons) {
-    answerButtons.style.display = "flex";
-  }
+  //Show answer buttons
+  showAnswerButtons();
 }
 
 //Checking if the current input is correct
-function checkTranslationInitial() {
+function checkTranslation() {
   let translation = <HTMLInputElement>(
     document.getElementById("flashcard-input")
   );
@@ -346,25 +359,10 @@ function checkTranslationInitial() {
       console.log("Answer is correct");
       translation.value = "";
       answerRight();
-      /*
-          if(cardsLearned === 0){
-            //If the user just finised learning the first card
-            changeStage21Correct();
-          }else if(cardsLearned === flashcardSet.length - 1){
-            //Learned the last card
-              window.location.href = "index.html";
-          }else{
-            //Finished learning one of the middle cards
-            remainingCards.push(currentCard);
-            changeStage23();
-          }
-
-          */
     } else {
       console.log("Answer is wrong");
       translation.value = "";
       answerWrong();
-      //changeStage21Wrong();
     }
   }
 }
@@ -372,16 +370,14 @@ function checkTranslationInitial() {
 //If the answer is right then change the text so that only correct shows up
 function answerRight() {
   //Hide the answers
+  hideAnswerButtons();
   let answerButtons = document.getElementById("answers");
-
   if (answerButtons) {
     answerButtons.style.display = "none";
   }
 
-  let flashcardText = document.getElementById("flash-question");
-  if (flashcardText) {
-    flashcardText.style.display = "none";
-  }
+  //Hide flashcardquestion
+  hideFlashcardQuestion();
 
   //Hide override
   let override = document.getElementById("override-button");
@@ -391,19 +387,15 @@ function answerRight() {
   }
 
   //Hide correct and wrong answer text
-
   let userAnswer = document.getElementById("userAnswer");
   if (userAnswer) {
     userAnswer.style.display = "none";
-    userAnswer.innerHTML = "User answer: " + lastInput;
   }
 
   let rightAnswer = document.getElementById("correctAnswer");
   if (rightAnswer && currentCard) {
     rightAnswer.style.display = "none";
-    rightAnswer.innerHTML = "Correct answer: " + currentCard.answer;
   }
-
 
   let correctness = document.getElementById("correctness");
 
@@ -455,20 +447,10 @@ function answerWrong() {
     rightAnswer.innerHTML = "Correct answer: " + currentCard.answer;
   }
 
-
   let override = document.getElementById("override-button");
   if (override) {
     override.style.display = "block";
   }
-
-}
-
-function checkTranslation() {
-  //if (stage === 2) {
-  checkTranslationInitial();
-  //} else {
-  //lastInput = translation.value.toLowerCase();
-  //}
 }
 
 //Remove the text (that says if the button is correct or not)
@@ -476,7 +458,6 @@ function checkTranslation() {
 //Put back the correct elements
 //Do this by calling changeStage21Correct()
 function continued() {
-
   transitionToNextPage();
   /*
   if (stage === 2) {
@@ -491,18 +472,20 @@ function continued() {
 
 function continueStage2() {
   let nextPage = document.getElementById("transitionStage");
-    if (nextPage) {
-      nextPage.style.display = "none";
-    }
+  if (nextPage) {
+    nextPage.style.display = "none";
+  }
 
   let flashcardText = document.getElementById("flash-question");
   if (flashcardText) {
     flashcardText.style.display = "block";
   }
 
-  //Not sure if this is okay or not
-  var answerCorrect: boolean =
-    lastInput === currentCard?.answer.toLocaleLowerCase();
+  let answerCorrect;
+  if(currentCard){
+     answerCorrect = lastInput.toLowerCase() === currentCard.answer.toLowerCase();
+  }
+ 
   console.log("Answer is " + answerCorrect);
 
   if (stage === 2 && answerCorrect === true && currentCard != undefined) {
@@ -519,9 +502,9 @@ function continueStage3() {
   //This is when the user is in the middle of answering all of the remaining flashcards and they get one either right or wrong
 
   let nextPage = document.getElementById("transitionStage");
-    if (nextPage) {
-      nextPage.style.display = "none";
-    }
+  if (nextPage) {
+    nextPage.style.display = "none";
+  }
 
   let flashcardText = document.getElementById("flash-question");
   if (flashcardText) {
@@ -586,7 +569,7 @@ function continueStage3() {
         //If we did then we finish and go to stage 5
         stage = 5;
         //TODO: Set up stage 5
-        complete()
+        complete();
       } else {
         stage = 1;
         cardsLearned++;
@@ -600,9 +583,9 @@ function continueStage3() {
 
 function continueStage4() {
   let nextPage = document.getElementById("transitionStage");
-    if (nextPage) {
-      nextPage.style.display = "none";
-    }
+  if (nextPage) {
+    nextPage.style.display = "none";
+  }
 
   let flashcardText = document.getElementById("flash-question");
   if (flashcardText) {
@@ -701,28 +684,26 @@ function changeStage31() {
   }
 }
 
-let transition1Counter:number = 1;
-let transition2Counter:number = 0;
-let transition3Counter:number = 0;
-let transition4Counter:number = 0;
-
-
+let transition1Counter: number = 1;
+let transition2Counter: number = 0;
+let transition3Counter: number = 0;
+let transition4Counter: number = 0;
 
 //When the button in the transition is clicked
 function nextButtonClicked() {
-
   let title = document.getElementById("transitionTitle");
 
-
-  if ((stage === 1 && title?.innerText === "Starting stage 1")) {
+  if (stage === 1 && title?.innerText === "Starting stage 1") {
     let nextPage = document.getElementById("transitionStage");
     if (nextPage) {
       nextPage.style.display = "none";
     }
 
     let flashcardText = document.getElementById("flash-question");
-    if (flashcardText) {
+    if (flashcardText && flashcardSet[0]) {
       flashcardText.style.display = "flex";
+      flashcardText.innerHTML = flashcardSet[0].question;
+      console.log(flashcardSet[0].question);
     }
 
     let learningButtons = document.getElementById("learning");
@@ -730,24 +711,18 @@ function nextButtonClicked() {
     if (learningButtons) {
       learningButtons.style.display = "flex";
     }
-
-    setup();
-  }else if (stage === 1) {
+  } else if (stage === 1) {
     changeStageNext2();
-  } else if(stage === 2){
+  } else if (stage === 2) {
     continueStage2();
-  }else if (stage === 3) {
+  } else if (stage === 3) {
     continueStage3();
   } else if (stage === 4) {
     continueStage4();
   }
-  
-
-
 }
 
 function transitionToNextPage() {
-
   let correctness = document.getElementById("correctness");
 
   if (correctness) {
@@ -775,111 +750,142 @@ function transitionToNextPage() {
   }
 
   let nextPage = document.getElementById("transitionStage");
-    if (nextPage) {
-      nextPage.style.display = "flex";
-    }
+  if (nextPage) {
+    nextPage.style.display = "flex";
+  }
 
   let title = document.getElementById("transitionTitle");
   let description = document.getElementById("stage-description");
 
-
-    
-
-  if(title && description && currentCard){
-    console.log("Does " + lastInput + " === " + currentCard.answer.toLowerCase());
+  if (title && description && currentCard) {
+    console.log(
+      "Does " + lastInput + " === " + currentCard.answer.toLowerCase()
+    );
 
     //Checking if we are in the middle of stage 3
-    if(stage === 3 && remainingCards.length > 1){
+    if (stage === 3 && remainingCards.length > 1) {
       nextButtonClicked();
-    }else if(stage === 4 && wrongList.length > 1){
+    } else if (stage === 4 && wrongList.length > 1) {
       //Checking if we are in the middle of stage 4
       nextButtonClicked();
-    } else if(stage === 1){
+    } else if (stage === 1) {
       title.innerText = "Starting stage 2";
       description.innerText = stage2Description;
       transition2Counter++;
 
-      if(transition2Counter > 2){
+      if (transition2Counter > 2) {
         nextButtonClicked();
       }
-      
-    }else if(stage === 2 && lastInput === currentCard.answer.toLowerCase()){
-
+    } else if (stage === 2 && lastInput === currentCard.answer.toLowerCase()) {
       title.innerText = "Starting stage 3";
       description.innerText = stage3Description;
       transition3Counter++;
 
-      if(transition3Counter > 2){
+      if (transition3Counter > 2) {
         nextButtonClicked();
       }
-
-    }else if(stage === 2){
-
+    } else if (stage === 2) {
       title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
       transition1Counter++;
 
-      if(transition1Counter > 2){
+      if (transition1Counter > 2) {
         //title.innerText = "Learning a new card";
         nextButtonClicked();
       }
-
-    }else if(stage === 3 && (wrongList.length > 0 || lastInput != currentCard?.answer.toLowerCase())){
-
+    } else if (
+      stage === 3 &&
+      (wrongList.length > 0 || lastInput != currentCard?.answer.toLowerCase())
+    ) {
       title.innerText = "Starting stage 4";
       description.innerText = stage4Description;
       transition4Counter++;
 
-      if(transition4Counter > 2){
+      if (transition4Counter > 2) {
         title.innerText = "Reviewing missed flashcards";
         description.innerText = "";
         //nextButtonClicked();
       }
-
-    }else if(stage === 3 && wrongList.length === 0){
+    } else if (stage === 3 && wrongList.length === 0) {
       title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
       transition1Counter++;
 
-      if(transition1Counter > 2){
+      if (transition1Counter > 2) {
         title.innerText = "Learning a new card";
         description.innerText = "";
         //nextButtonClicked();
       }
 
       //Check if the game is finished
-      if(cardsLearned+1 === flashcardSet.length){
+      if (cardsLearned + 1 === flashcardSet.length) {
         complete();
       }
-
-    }else if(stage === 4 && lastInput != currentCard?.answer.toLowerCase()){
+    } else if (stage === 4 && lastInput != currentCard?.answer.toLowerCase()) {
       title.innerText = "Staying on stage 4";
       description.innerText = stage4Description;
       transition4Counter++;
 
-      if(transition4Counter > 2){
+      if (transition4Counter > 2) {
         description.innerText = "";
         //nextButtonClicked();
       }
+    } else if (stage === 4 && wrongList.length === 1) {
 
-    }else if(stage === 4 && wrongList.length === 1){
+
+      //Show the stage4selection screen
+      nextToStage4Selection();
+
       title.innerText = "Starting stage 1";
       description.innerText = stage1Description;
       transition1Counter++;
 
-      if(transition1Counter > 2){
+      if (transition1Counter > 2) {
         title.innerText = "Learning a new card";
         description.innerText = "";
         //nextButtonClicked();
       }
-
-    }
-    else{
+    } else {
       title.innerText = "Error";
       description.innerText = "Error";
     }
   }
 }
+
+
+function reviewCards4to3(){
+  stage = 3;
+  
+  let stage4 = document.getElementById("stage4complete");
+
+  if (stage4) {
+    stage4.style.display = "none";
+  }
+  
+  moveToDifferentList(remainingCards, correctList);
+  moveToDifferentList(remainingCards, wrongList);
+  currentCard = remainingCards[0];
+
+  showAnswerButtons();
+  showFlashcardQuestion();
+  
+
+  
+
+}
+
+function finishStage4(){
+
+let stage4 = document.getElementById("stage4complete");
+
+  if (stage4) {
+    stage4.style.display = "none";
+  }
+
+  continueStage4();
+}
+
+
 
 function moveToDifferentList(newList: Flashcard[], oldList: Flashcard[]) {
   while (oldList.length !== 0) {
@@ -889,35 +895,35 @@ function moveToDifferentList(newList: Flashcard[], oldList: Flashcard[]) {
 }
 
 function shuffle(array: Flashcard[]) {
-  let currentIndex:number = array.length;
-  let randomIndex:number;
+  let currentIndex: number = array.length;
+  let randomIndex: number;
 
   // While there remain elements to shuffle.
   while (currentIndex > 0) {
-
     // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 
     // And swap it with the current element.
     [array[currentIndex]!, array[randomIndex]!] = [
-      array[randomIndex]!, array[currentIndex]!];
+      array[randomIndex]!,
+      array[currentIndex]!,
+    ];
   }
 
   return array;
 }
 
-function override(){
-  if(currentCard){
+function override() {
+  if (currentCard) {
     lastInput = currentCard.answer.toLowerCase();
     answerRight();
-  }else{
-    console.log("Error: currentCard is undefined")
+  } else {
+    console.log("Error: currentCard is undefined");
   }
-  
 }
 
-function complete(){
+function complete() {
   let flashcard = document.getElementById("flashcard");
 
   if (flashcard) {
@@ -931,6 +937,77 @@ function complete(){
   }
 }
 
-function goHome(){
+function goHome() {
   window.location.href = "index.html";
+}
+
+
+function nextToStage4Selection(){
+  hideNextPage();
+
+  let stage4 = document.getElementById("stage4complete");
+
+  if (stage4) {
+    stage4.style.display = "flex";
+  }
+
+}
+
+
+
+
+//Hide functions - functions that hide specific elements
+function hideLearningButtons() {
+  let learningButtons = document.getElementById("learning");
+
+  if (learningButtons) {
+    learningButtons.style.display = "none";
+  }
+}
+
+function hideNextPage() {
+  let nextPage = document.getElementById("transitionStage");
+  if (nextPage) {
+    nextPage.style.display = "none";
+  }
+}
+
+function hideAnswerButtons() {
+  let answerButtons = document.getElementById("answers");
+  if (answerButtons) {
+    answerButtons.style.display = "none";
+  }
+}
+
+function hideFlashcardQuestion() {
+  let flashcardText = document.getElementById("flash-question");
+  if (flashcardText) {
+    flashcardText.style.display = "none";
+  }
+}
+
+//Show functions - functions that show specific elements
+
+function showAnswerButtons() {
+  let answerButtons = document.getElementById("answers");
+
+  if (answerButtons) {
+    answerButtons.style.display = "flex";
+  }
+}
+
+function showFlashcardQuestion() {
+  let flashcardText = document.getElementById("flash-question");
+
+  if (flashcardText && currentCard) {
+    flashcardText.style.display = "flex";
+    flashcardText.innerHTML = currentCard.question;
+  }
+}
+
+function showLearningButtons() {
+  let learningButtons = document.getElementById("learning");
+  if (learningButtons) {
+    learningButtons.style.display = "flex";
+  }
 }
