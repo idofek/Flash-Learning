@@ -1,3 +1,8 @@
+# Flash-Learning
+
+This project is a web application designed to help students memorize flashcards more effectively. It provides a simple interface for selecting flashcard sets and engaging with the material through an interactive flashcard system.
+
+
 ### Features
 - Select flashcard sets from different subjects
 - Interactive flashcard display with flipping functionality
@@ -7,10 +12,10 @@
 
 Below are some images of the project in action:
 
-![Homepage](docs/images/FL_Homepage.png)
-![Page to select flashcard set](docs/images/FL_SelectSubject.png)
-![Stage 1 Description](docs/images/FL_Stage1.png)
-![Example Flashcard](docs/images/FL_Flashcard.png)
+<img src="docs/images/FL_Homepage.png" alt="Homepage" width="400">
+<img src="docs/images/FL_SelectSubject.png" alt="Page to select flashcard set" width="400">
+<img src="docs/images/FL_Stage1.png" alt="Stage 1 Description" width="400">
+<img src="docs/images/FL_Flashcard.png" alt="Example Flashcard" width="400">
 
 ## Tech Stack
 
